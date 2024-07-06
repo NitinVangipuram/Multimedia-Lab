@@ -2,15 +2,20 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // Import Bootstrap JS for collapse functionality
 import { Link } from 'react-router-dom';
+import logo from '../Img/logo.png';
 
 const Navbar = () => {
   return (
     <div>
-      <div className="container-fluid sticky-top" style={{ backgroundColor: "#1363C6" }}>
+      <div className="container-fluid sticky-top" style={{ backgroundColor: "rgb(59,32,59)" }}>
         <div className="container">
           <nav className="navbar navbar-expand-lg navbar-dark p-0">
             <Link to="/" className="navbar-brand">
-              <h1 className="text-white">Multimedia<span className="text-dark">.</span>Lab</h1>
+              {/* <h1 className="text-white"> EMA LAB 記<span className="text-dark">.</span> IITDH</h1> */}
+              <img src={logo} 
+              alt="logo"
+              style={{width: '237px', height: '140px' }}
+              />
             </Link>
             <button
               type="button"

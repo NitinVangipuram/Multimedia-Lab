@@ -10,10 +10,10 @@ h1, h2 {
 }
 
 :root {
-    --primary: #1363C6;
-    --secondary: #15ACE1;
-    --light: #F4F7FE;
-    --dark: #14183E;
+    --primary:rgb(59,32,59) ;
+    --secondary:#9a3b9a;
+    --light:#ffeaff;
+    --dark: rgb(59,32,59);
 }
 
 
@@ -97,7 +97,7 @@ h6,
 
 .navbar {
     padding: 11px 0 !important;
-    height: 75px;
+    height: 85px;
 }
 
 .navbar .navbar-nav .nav-link {

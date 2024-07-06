@@ -18,7 +18,7 @@ const News = () => {
             data-wow-delay="0.1s"
             style={{ maxWidth: '500px' }}
           >
-            <div className="btn btn-sm border rounded-pill text-primary px-3 mb-3">News</div>
+            <div className="btn btn-sm border rounded-pill  px-3 mb-3" style={{color:"#9a3b9a"}}>News</div>
             <h1 className="mb-4">Explore Our Recent  News</h1>
           </div>
           <div className="row g-4">
@@ -28,7 +28,7 @@ const News = () => {
                 <div className="case-overlay text-decoration-none">
                   <small>Robotic Automation</small>
                   <h5 className="lh-base text-white mb-3">Lorem elitr magna stet eirmod labore amet labore clita</h5>
-                  <span className="btn btn-square btn-primary"><i className="fa fa-arrow-right"></i></span>
+                  <span className="btn btn-square " style={{background:"#9a3b9a" , color:"white"}}><i className="fa fa-arrow-right"></i></span>
                 </div>
               </div>
             </div>
@@ -38,7 +38,7 @@ const News = () => {
                 <div className="case-overlay text-decoration-none">
                   <small>Machine Learning</small>
                   <h5 className="lh-base text-white mb-3">Lorem elitr magna stet eirmod labore amet labore clita</h5>
-                  <span className="btn btn-square btn-primary"><i className="fa fa-arrow-right"></i></span>
+                  <span className="btn btn-square " style={{background:"#9a3b9a" , color:"white"}}><i className="fa fa-arrow-right"></i></span>
                 </div>
               </div>
             </div>
@@ -48,7 +48,7 @@ const News = () => {
                 <div className="case-overlay text-decoration-none">
                   <small>Predictive Analysis</small>
                   <h5 className="lh-base text-white mb-3">Lorem elitr magna stet eirmod labore amet labore clita</h5>
-                  <span className="btn btn-square btn-primary"><i className="fa fa-arrow-right"></i></span>
+                  <span className="btn btn-square " style={{background:"#9a3b9a" , color:"white"}}><i className="fa fa-arrow-right"></i></span>
                 </div>
               </div>
             </div>

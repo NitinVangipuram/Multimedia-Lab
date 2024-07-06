@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import svg from "../Img/ar-vr-mr-training.png"
 
 const PublicationsPage = () => {
   const publications = [
@@ -23,7 +24,7 @@ const PublicationsPage = () => {
 
   return (
     <div>
-      <div className="container-fluid pt-5 bg-primary hero-header">
+      <div className="container-fluid pt-5 hero-header" style={{background:"rgb(59,32,59)"}}>
         <div className="container pt-5">
           <div className="row g-5 pt-5">
             <div className="col-lg-6 align-self-center text-lg-start mb-lg-5">
@@ -38,19 +39,19 @@ const PublicationsPage = () => {
               </nav>
             </div>
             <div className="col-lg-6 align-self-end text-lg-end">
-              <img className="img-fluid" src="https://iluzialabs.com/wp-content/uploads/2023/06/ar-vr-mr-training.png" alt="" style={{ maxHeight: '300px' }} />
+            <img className="img-fluid" src={svg} alt="" style={{ maxHeight: '300px' }} />
             </div>
           </div>
         </div>
       </div>
       <div className="container my-5">
-        <h2 style={{ color: '#1363c6', fontWeight: 'bold', marginBottom: '30px' }}>Our Latest Publications</h2>
+        <h2 style={{ color: '#9a3b9a', fontWeight: 'bold', marginBottom: '30px' }}>Our Latest Publications</h2>
         {publications.map((pub, index) => (
-          <div key={index} className="mb-4 p-4" style={{ backgroundColor: '#f4f7fe', borderRadius: '12px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
-            <h3 style={{ color: '#1363c6', fontWeight: 'bold', textAlign: 'left' }}>{pub.title}</h3>
+          <div key={index} className="mb-4 p-4" style={{ backgroundColor: '#ffeaff', borderRadius: '12px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
+            <h3 style={{ color: '#9a3b9a', fontWeight: 'bold', textAlign: 'left' }}>{pub.title}</h3>
             <p style={{ color: '#333', lineHeight: '1.6', textAlign: 'left' }}>{pub.description}</p>
             <div style={{ textAlign: 'left' }}>
-              <Link to="#" style={{ backgroundColor: '#1363c6', color: '#fff', padding: '10px 20px', borderRadius: '5px', textDecoration: 'none', fontWeight: 'bold', display: 'inline-block', marginTop: '10px' }}>Read more</Link>
+              <Link to="#" style={{ backgroundColor: '#9a3b9a', color: '#fff', padding: '10px 20px', borderRadius: '5px', textDecoration: 'none', fontWeight: 'bold', display: 'inline-block', marginTop: '10px' }}>Read more</Link>
             </div>
           </div>
         ))}

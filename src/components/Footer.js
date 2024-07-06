@@ -2,15 +2,20 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // Import Bootstrap JS for collapse functionality
 import { Link } from 'react-router-dom';
+import logo from '../Img/logo.png';
 const Footer = () => {
   return (
     <div>
-        <div class="container-fluid bg-dark text-white-50 footer pt-5">
+        <div class="container-fluid  text-white-50 footer pt-5" style={{background:"rgb(59,32,59)"}}>
         <div class="container py-5" >
             <div class="row g-5" style={{display:"flex", justifyContent:"space-between"}}>
-                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
+                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s" style={{marginTop:"0px"}}>
                     <Link to="/" class="d-inline-block mb-3">
-                        <h1 class="text-white">Multimedia<span class="text-primary">.</span>Lab</h1>
+                        {/* <h1 class="text-white">Multimedia<span class="text-primary">.</span>Lab</h1> */}
+                        <img src={logo} 
+              alt="logo"
+              style={{width: '237px', height: '140px' }}
+              />
                     </Link>
                     <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam
                         amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus

@@ -1,11 +1,13 @@
 import React from 'react'
 import Team from '../components/Team'
 import { Link } from 'react-router-dom'
+import svg from "../Img/ar-vr-mr-training.png"
+
 
 const TeamPage = () => {
   return (
     <div>
-   <div className="container-fluid pt-5 bg-primary hero-header">
+   <div className="container-fluid pt-5 hero-header" style={{background:"rgb(59,32,59)"}}>
       <div className="container pt-5">
         <div className="row g-5 pt-5">
           <div className="col-lg-6 align-self-center text-center text-lg-start mb-lg-5">
@@ -21,7 +23,7 @@ const TeamPage = () => {
             </nav>
           </div>
           <div className="col-lg-6 align-self-end text-center text-lg-end">
-            <img className="img-fluid" src="https://iluzialabs.com/wp-content/uploads/2023/06/ar-vr-mr-training.png" alt="" style={{ maxHeight: '300px' }} />
+          <img className="img-fluid" src={svg} alt="" style={{ maxHeight: '300px' }} />
           </div>
         </div>
       </div>
