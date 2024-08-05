@@ -40,7 +40,7 @@ const Team = () => {
 
   return (
     <div>
-      <div className="container-fluid py-5" style={{ background: "#ffeaff" }}>
+      <div className="container-fluid " style={{ background: "#ffeaff" }}>
         <div className="container py-5">
           <div className="row g-5 align-items-center">
             <div className="col-lg-5 wow fadeIn" data-wow-delay="0.1s">
@@ -60,7 +60,7 @@ const Team = () => {
                       <div className="row g-4">
                         <div className="col-12 wow fadeIn" data-wow-delay={`${0.1 + index * 0.2}s`}>
                           <div className="team-item bg-white text-center rounded p-4 pt-0">
-                          {imageUrl && <img className="img-fluid rounded-circle p-4" src={imageUrl} alt={Name} style={{ height: '150px', objectFit: 'cover' }} />}
+                          {imageUrl && <img className="img-fluid rounded-circle p-4" src={imageUrl} alt={Name} style={{ height: '170px', objectFit: 'cover' }} />}
                             <h5 className="mb-0">{Name}</h5>
                             <small>{Role}</small>
                             <div className="d-flex justify-content-center mt-3">

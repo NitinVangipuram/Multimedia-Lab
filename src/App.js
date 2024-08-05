@@ -10,6 +10,7 @@ import PublicationsPage from './pages/PublicationsPage';
 import PublicationDetail from './pages/PublicationDetail';
 import ResearchDetail from './pages/ResearchDetail';
 import NewsPage from './pages/NewsPage';
+import NewsDetail from './pages/NewsDetail';
 import '../src/styles/animate.css';
 import '../src/styles/bootstrap.min.css';
 import '../src/styles/style.css';
@@ -25,6 +26,7 @@ function App() {
           <Route path="/research" element={<ResearchPage />} />
           <Route path ="/research/:id" element={<ResearchDetail />} />
           <Route path="/news" element={<NewsPage />} />
+          <Route path="/news/:id" element={<NewsDetail />} />
           <Route path="/publications" element={<PublicationsPage />} />
           <Route path="/publications/:id" element={<PublicationDetail />} />
         </Routes>
