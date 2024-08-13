@@ -2,7 +2,7 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // Import Bootstrap JS for collapse functionality
 import { Link } from 'react-router-dom';
-import logo from '../Img/logo.png';
+import logo from '../Img/logo-3.png';
 const Footer = () => {
   return (
     <div>
@@ -14,7 +14,7 @@ const Footer = () => {
                         {/* <h1 class="text-white">Multimedia<span class="text-primary">.</span>Lab</h1> */}
                         <img src={logo} 
               alt="logo"
-              style={{width: '237px', height: '140px' }}
+              style={{height: '140px' }}
               />
                     </Link>
                     <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam

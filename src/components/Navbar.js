@@ -3,16 +3,16 @@ import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // Import Bootstrap JS for collapse functionality
 import { Link } from 'react-router-dom';
 import {useState , useEffect} from 'react';
-import logo from '../Img/logo.png';
+import logo from '../Img/logo-3.png';
 
 const Navbar = () => {
-  const [logoSize, setLogoSize] = useState({ width: '237px', height: '140px' });
+  const [logoSize, setLogoSize] = useState({  height: '140px' });
 
   const updateLogoSize = () => {
-    if (window.innerWidth <= 768) {
+    if (window.innerWidth <= 990) {
       setLogoSize({ width: '199px', height: '120px' });
     } else {
-      setLogoSize({ width: '237px', height: '140px' });
+      setLogoSize({ height: '140px',marginTop:"20px", });
     }
   };
 
@@ -28,7 +28,7 @@ const Navbar = () => {
           <nav className="navbar navbar-expand-lg navbar-dark p-0">
             <Link to="/" className="navbar-brand">
               {/* <h1 className="text-white"> EMA LAB 記<span className="text-dark">.</span> IITDH</h1> */}
-              <img src={logo} alt="logo" style={{ width: logoSize.width, height: logoSize.height }} />
+              <img src={logo} alt="logo" style={{ width: logoSize.width, height: logoSize.height , marginTop:logoSize.marginTop }} />
             </Link>
             <button
               type="button"
