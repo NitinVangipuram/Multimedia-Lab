@@ -11,23 +11,9 @@ const PublicationsPage = () => {
       .then(data => setPublications(data.data))
       .catch(error => console.error('Error fetching publications:', error));
   }, []);
-  const [logoSize, setLogoSize] = useState({ });
-  const updateLogoSize = () => {
-    if (window.innerWidth <= 990) {
-      setLogoSize({ marginTop:"2rem",paddingTop: "0px", });
-    } else {
-      setLogoSize({paddingTop: "0px"});
-    }
-  };
-
-  useEffect(() => {
-    updateLogoSize();
-    window.addEventListener('resize', updateLogoSize);
-    return () => window.removeEventListener('resize', updateLogoSize);
-  }, []);
   return (
     <div>
-      <div className="container-fluid pt-5 hero-header" style={{ background: "rgb(59,32,59)",marginTop:logoSize.marginTop }}>
+      <div className="container-fluid  hero-header" style={{ background: "rgb(59,32,59)"}}>
         <div className="container pt-5">
           <div className="row g-5 pt-5">
             <div className="col-lg-6 align-self-center text-lg-start mb-lg-5">
