@@ -22,10 +22,23 @@ const Hero = () => {
         console.error('There was an error fetching the hero content!', error);
       });
   }, []);
+  const [logoSize, setLogoSize] = useState({ });
+  const updateLogoSize = () => {
+    if (window.innerWidth <= 990) {
+      setLogoSize({ marginTop:"2rem",paddingTop: "0px", });
+    } else {
+      setLogoSize({paddingTop: "0px"});
+    }
+  };
 
+  useEffect(() => {
+    updateLogoSize();
+    window.addEventListener('resize', updateLogoSize);
+    return () => window.removeEventListener('resize', updateLogoSize);
+  }, []);
   return (
     <div>
-        <div class="container-fluid pt-5 hero-header " style={{background:"rgb(59,32,59)"}}>
+        <div class="container-fluid  hero-header " style={{background:"rgb(59,32,59)",paddingTop:logoSize.paddingTop,marginTop:logoSize.marginTop}}>
         <div class="container pt-5">
             <div class="row g-5 pt-5">
                 <div class="col-lg-6 align-self-center text-center text-lg-start mb-lg-5">
