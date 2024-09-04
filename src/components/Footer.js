@@ -24,7 +24,7 @@ const Footer = () => {
                         {/* <h1 class="text-white">Multimedia<span class="text-primary">.</span>Lab</h1> */}
                         <img src={logo} 
               alt="logo"
-              style={{height: '140px' }}
+              style={{height: '120px',background:"white",borderRadius:"18px",marginBottom:"18px"}}
               />
                     </Link>
                     <p class="mb-0" style={{textAlign:"justify"}}>{footer.Description}</p>
