@@ -4,7 +4,7 @@ import svg from '../Img/ar-vr-mr-training.png';
 const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
 
 const Hero = () => {
-  const [heroContent, setHeroContent] = useState({ description: '' });
+  const [heroContent, setHeroContent] = useState({ description: '',Websitetitle:'' });
 
   useEffect(() => {
     axios.get(`${apiEndpoint}/api/tilte`)
@@ -29,8 +29,8 @@ const Hero = () => {
             <div class="row g-5 pt-5">
                 <div class="col-lg-6 align-self-center text-center text-lg-start mb-lg-5">
                     {/* <div class="btn btn-sm border rounded-pill text-white px-3 mb-3 animated slideInRight"></div> */}
-                    <h1 class="display-4 text-white mb-4 animated slideInRight"> Emerging Multimedia Lab IIT Dharwad</h1>
-                    <p class="text-white mb-4 animated slideInRight">{heroContent.description}</p>
+                    <h1 class="display-4 text-white mb-4 animated slideInRight"> {heroContent.Websitetitle}</h1>
+                    <p class="text-white mb-4 animated slideInRight" style={{textAlign:"justify"}}>{heroContent.description}</p>
                     <a href="" class="btn  py-sm-3 px-sm-5 rounded-pill me-3 animated slideInRight" style={{background:"#9a3b9a" , color:"white"}}>Read More</a>
                     <a href="" class="btn btn-outline-light py-sm-3 px-sm-5 rounded-pill animated slideInRight">Contact Us</a>
                 </div>

@@ -1,25 +1,33 @@
 import React from 'react'
+import { useState,useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // Import Bootstrap JS for collapse functionality
 import { Link } from 'react-router-dom';
 import logo from '../Img/logo-3.png';
+const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
+
 const Footer = () => {
+    const [footer , setFooter] = useState([]);
+    useEffect(() => {
+        fetch(`${apiEndpoint}/api/footer`)
+          .then(response => response.json())
+          .then(data => setFooter(data.data.attributes))
+          .catch(error => console.error('Error fetching news:', error));
+      }, []);
   return (
     <div>
         <div class="container-fluid  text-white-50 footer pt-5" style={{background:"rgb(59,32,59)"}}>
         <div class="container py-5" >
             <div class="row g-5" style={{display:"flex", justifyContent:"space-between"}}>
                 <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s" style={{marginTop:"0px"}}>
-                    <Link to="/" class="d-inline-block mb-3">
+                    <Link to="/" class="d-inline-block">
                         {/* <h1 class="text-white">Multimedia<span class="text-primary">.</span>Lab</h1> */}
                         <img src={logo} 
               alt="logo"
               style={{height: '140px' }}
               />
                     </Link>
-                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam
-                        amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus
-                        clita duo justo et tempor</p>
+                    <p class="mb-0" style={{textAlign:"justify"}}>{footer.Description}</p>
                 </div>
                 <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
                     <h5 class="text-white mb-4">Our Links</h5>
@@ -28,22 +36,23 @@ const Footer = () => {
         <Link className="btn btn-link" to="/team">Team</Link>
         <Link className="btn btn-link" to="/news">News</Link>
         <Link className="btn btn-link" to="/research">Research</Link>
+        <a className="btn btn-link" href="https://ema.iitdh.ac.in/ragchatbot">Smart Chatbot</a>
         <Link className="btn btn-link" to="/publications">Publications</Link>
       </div>
                     {/* <a class="btn btn-link" href="">Career</a> */}
                 </div>
-                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s">
+                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s" >
                     <h5 class="text-white mb-4">Get In Touch</h5>
-                    <p><i class="fa fa-map-marker-alt me-3"></i>Indian Institute of Technology Dharwad, Chikka Malligwad, Dharwad, Karnataka - 580007</p>
-                    <p><i class="fa fa-phone-alt me-3"></i>+123456789</p>
-                    <p><i class="fa fa-envelope me-3"></i>pro@iitdh.ac.in</p>
-                    <div class="d-flex pt-2" style={{marginLeft:"40px"}}>
+                    <p ><i class="fa fa-map-marker-alt me-3"></i>{footer.Address}</p>
+                    <p ><i class="fa fa-phone-alt me-3"></i>{footer.Contact}</p>
+                    <p ><i class="fa fa-envelope me-3"></i>{footer.Mail}</p>
+                    {/* <div class="d-flex pt-2" style={{marginLeft:"40px"}}>
                         <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
                         <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
                         <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
                         <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-instagram"></i></a>
                         <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
-                    </div>
+                    </div> */}
                 </div>
       
                 {/* <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.7s">

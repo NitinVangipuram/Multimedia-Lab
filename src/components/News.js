@@ -82,7 +82,9 @@ const News = () => {
                 }}
               >
                 <h5 style={{ marginBottom: '10px' }}>
-                  {item.attributes.Title}
+                {item.attributes.Title.length > 76
+    ? `${item.attributes.Title.substring(0, 76)}...`
+    : item.attributes.Title}
                 </h5>
                 <p style={{ marginBottom: '10px' ,color:"black" }}>
                   {item.attributes.Description.length > maxLength

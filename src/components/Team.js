@@ -46,7 +46,7 @@ const Team = () => {
             <div className="col-lg-5 wow fadeIn" data-wow-delay="0.1s">
               <div className="btn btn-sm border rounded-pill px-3 mb-3" style={{ color: "#9a3b9a" }}>Our Team</div>
               <h1 className="mb-4">Meet Our Team Members</h1>
-              <p className="mb-4">{teamContent.description}</p>
+              <p className="mb-4" style={{textAlign:"justify"}}>{teamContent.description}</p>
               <a className="btn rounded-pill px-4" href="" style={{ background: "#9a3b9a", color: "white" }}>Read More</a>
             </div>
             <div className="col-lg-7">

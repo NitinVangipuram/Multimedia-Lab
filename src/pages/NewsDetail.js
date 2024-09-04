@@ -19,13 +19,13 @@ const NewsDetail = () => {
         <div className="container pt-5">
           <div className="row g-5 pt-5">
             <div className="col-lg-6 align-self-center text-lg-start mb-lg-5">
-              <h1 className="display-4 text-white mb-4 animated slideInRight">{Title.slice(0,10)}</h1>
+              <h1 className="display-4 text-white mb-4 animated slideInRight">News</h1>
               <nav aria-label="breadcrumb">
                 <ol className="breadcrumb justify-content-lg-start mb-0">
                   <li className="breadcrumb-item">
                     <Link className="text-white" to="/">Home</Link>
                   </li>
-                  <li className="breadcrumb-item text-white active" aria-current="page">News / {Title.slice(0,10)}</li>
+                  <li className="breadcrumb-item text-white active" aria-current="page">News / {Title.slice(0,15)}</li>
                 </ol>
               </nav>
             </div>
@@ -39,18 +39,18 @@ const NewsDetail = () => {
         <div className="row">
           <div className="col-md-10 mx-auto">
             <div className="bg-white p-4  ">
-              <h1 className="text-dark mb-3">{Title}</h1>
+              <h1 className="text-dark mb-3" style={{textAlign:"justify"}}>{Title}</h1>
               <div className="mb-4">
                 {Image && (
                   <img
                     className="img-fluid rounded"
                     src={Image.data.attributes.formats.thumbnail.url}
                     alt={Title}
-                    style={{ maxWidth: '100%', height: 'auto' }}
+                    style={{ maxWidth: '100%', height: '' }}
                   />
                 )}
               </div>
-              <p className="text-muted" style={{ lineHeight: '1.8' }}>{Description}</p>
+              <p className="text-muted" style={{ lineHeight: '1.8', textAlign:"justify" }}>{Description}</p>
               <div className="text-center mt-4">
                 <Link
                   to="/news"
