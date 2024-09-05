@@ -58,7 +58,7 @@ const News = () => {
             >
               {item.attributes.Image && (
                 <img
-                  src={item.attributes.Image.data.attributes.formats.thumbnail.url}
+                  src={item.attributes.Image.data.attributes.formats.medium.url}
                   alt={`News ${index + 1}`}
                   style={{
                     width: '100%',

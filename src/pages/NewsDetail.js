@@ -44,7 +44,7 @@ const NewsDetail = () => {
                 {Image && (
                   <img
                     className="img-fluid rounded"
-                    src={Image.data.attributes.formats.thumbnail.url}
+                    src={Image.data.attributes.formats.medium.url}
                     alt={Title}
                     style={{ maxWidth: '100%', height: '' }}
                   />
