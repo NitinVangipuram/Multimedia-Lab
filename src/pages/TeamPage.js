@@ -85,7 +85,7 @@ const TeamPage = () => {
         </div>
       </div>
 
-      <div className="container-fluid" style={{ background: '#ffeaff' }}>
+      <div className="container-fluid" style={{ background: '#ffeaff',paddingTop:"1rem" }}>
         <div className="container" style={{ paddingBottom: '2rem' }}>
           <h3 style={{ color: '#9a3b9a', textAlign: 'center', color: 'black' }}>Past Team</h3>
           <div className="row g-12">
