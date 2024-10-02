@@ -1,12 +1,12 @@
 import React from 'react'
 import Hero from '../components/Hero'
-import Team from '../components/Team'
+import About from '../components/About'
 import News from '../components/News'
 const Main = () => {
   return (
     <div>
     <Hero  />
-     <Team  />
+     <About  />
      <News />
     </div>
   )

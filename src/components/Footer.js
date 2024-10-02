@@ -8,12 +8,20 @@ const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
 
 const Footer = () => {
     const [footer , setFooter] = useState([]);
+    const [footerLinks, setFooterLinks] = useState([]);
+
     useEffect(() => {
         fetch(`${apiEndpoint}/api/footer`)
           .then(response => response.json())
           .then(data => setFooter(data.data.attributes))
           .catch(error => console.error('Error fetching news:', error));
+
+        fetch(`${apiEndpoint}/api/footer-links`)
+          .then(response => response.json())
+          .then(data => setFooterLinks(data.data))
+          .catch(error => console.error('Error fetching footer links:', error));
       }, []);
+      
   return (
     <div>
         <div class="container-fluid  text-white-50 footer pt-5" style={{background:"rgb(59,32,59)"}}>
@@ -29,18 +37,20 @@ const Footer = () => {
                     </Link>
                     <p class="mb-0" style={{textAlign:"justify"}}>{footer.Description}</p>
                 </div>
-                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
-                    <h5 class="text-white mb-4">Our Links</h5>
-                    <div style={{ marginLeft: "100px" }}>
-        <Link className="btn btn-link" to="/">Home</Link>
-        <Link className="btn btn-link" to="/team">Team</Link>
-        <Link className="btn btn-link" to="/news">News</Link>
-        <Link className="btn btn-link" to="/research">Research</Link>
-        <a className="btn btn-link" href="https://ema.iitdh.ac.in/ragchatbot">Smart Chatbot</a>
-        <Link className="btn btn-link" to="/publications">Publications</Link>
-      </div>
-                    {/* <a class="btn btn-link" href="">Career</a> */}
-                </div>
+                 <div className="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
+              <h5 className="text-white mb-4">Our Links</h5>
+              <div style={{ marginLeft: "100px" }}>
+                {footerLinks.map(link => (
+                  <Link
+                    key={link.id}
+                    className="btn btn-link"
+                    to={`/${link.attributes.Route || ''}`}
+                  >
+                    {link.attributes.Name}
+                  </Link>
+                ))}
+              </div>
+            </div>
                 <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s" >
                     <h5 class="text-white mb-4">Get In Touch</h5>
                     <p ><i class="fa fa-map-marker-alt me-3"></i>{footer.Address}</p>
