@@ -41,13 +41,13 @@ const Footer = () => {
               <h5 className="text-white mb-4">Our Links</h5>
               <div style={{ marginLeft: "100px" }}>
                 {footerLinks.map(link => (
-                  <Link
+                  <a
                     key={link.id}
                     className="btn btn-link"
-                    to={`/${link.attributes.Route || ''}`}
+                    href={`/${link.attributes.Route || ''}`}
                   >
                     {link.attributes.Name}
-                  </Link>
+                  </a>
                 ))}
               </div>
             </div>

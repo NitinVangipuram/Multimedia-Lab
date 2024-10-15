@@ -52,15 +52,15 @@ useEffect(() => {
         <div className={`collapse navbar-collapse ${isOpen ? 'show' : ''}`} id="navbarCollapse">
           <div className="navbar-nav ms-auto">
             {links.map(link => (
-              <Link
+              <a
                 key={link.id}
-                to={`/${link.attributes.Route || ''}`}
+                href={`/${link.attributes.Route || ''}`}
                 onClick={() => setIsOpen(!isOpen)}
                 className="nav-item nav-link"
                 style={{ fontWeight: "bold", color: isMobile ? 'white' : 'black' }}
               >
                 {link.attributes.Name}
-              </Link>
+              </a>
             ))}
           </div>
         </div>

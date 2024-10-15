@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import aboutImg from '../Img/third.png';
+import { Link } from 'react-router-dom';
 const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
 
 const Team = () => {
@@ -42,13 +43,13 @@ const Team = () => {
               <p className="mb-4" style={{ textAlign: "justify" }}>
              {aboutContent.Description}
               </p>
-              <a
+              <Link
                 className="btn rounded-pill px-4"
-                href=""
+                to="/aboutus"
                 style={{ background: "#9a3b9a", color: "white" }}
               >
                 Read More
-              </a>
+              </Link>
             </div>
           
               <img
