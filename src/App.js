@@ -18,7 +18,6 @@ import NewsDetail from './pages/NewsDetail';
 import '../src/styles/animate.css';
 import '../src/styles/bootstrap.min.css';
 import '../src/styles/style.css';
-import TeachingPage from './pages/TeachingPage';
 import DynamicPage from './DynamicPage';
 function App() {
   return (
@@ -34,7 +33,6 @@ function App() {
           <Route path="/news/:id" element={<NewsDetail />} />
           <Route path="/publications" element={<PublicationsPage />} />
           <Route path="/publications/:id" element={<PublicationDetail />} />
-          <Route path ="/teaching" element={<TeachingPage />} />
           <Route path="/:slug" element={<DynamicPage />} />
         </Routes>
         <Footer />
