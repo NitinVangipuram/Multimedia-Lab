@@ -6,7 +6,7 @@ const MarkdownComponent = ({data}) => {
           <div className="container my-5">
           <div className="row">
             <div className="col-md-10 mx-auto">
-              <div className="bg-white p-4  ">
+              <div className="bg-white p-4" style={{textAlign:"left"}}>
       <MarkdownRenderer markdownContent={data} />
       </div>
       </div>
