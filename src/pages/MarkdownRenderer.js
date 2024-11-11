@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
-import './Markdown.css';
 const MarkdownRenderer = ({ markdownContent }) => {
   const formattedContent = markdownContent.replace(/\\n/g, '\n\n');
   return (
