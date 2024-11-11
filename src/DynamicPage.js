@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import svg from "./Img/ar-vr-mr-training.png";
 import axios from 'axios';
+import MarkdownComponent from './pages/MarkdownComponent';
 
 const fetchPageData = async (slug) => {
     const response = await axios.get(`https://ema.iitdh.ac.in/api/api/pages?filters[slug][$eq]=${slug}&populate[Contents][populate]=*`);
@@ -28,7 +29,7 @@ const DynamicPage = () => {
           <div className="container pt-5">
             <div className="row g-5 pt-5">
               <div className="col-lg-6 align-self-center text-lg-start mb-lg-5">
-                <h1 className="display-4 text-white mb-4 animated slideInRight">{pageData.attributes.slug}</h1>
+                <h1 className="display-4 text-white mb-4 animated slideInRight" style={{textAlign:"left"}}>{pageData.attributes.slug}</h1>
                 <nav aria-label="breadcrumb">
                   <ol className="breadcrumb justify-content-lg-start mb-0">
                     <li className="breadcrumb-item">
@@ -88,6 +89,23 @@ const DynamicPage = () => {
           </div>
         </div>
       </div>
+    );
+    case 'titleblock.titleblock':
+              return (
+      <div>
+      <h2 style={{ color: '#9a3b9a', textAlign: 'center', color: 'black' }}>{content.title}</h2>
+      </div>
+    );
+    case 'descriptionblock.descriptionblock':
+              return (
+      <div>
+      <p>{content.description}</p>
+      </div>
+    );
+
+    case 'markdowncomponent.markdowncomponent':
+              return (
+                <MarkdownComponent data={content.markdowncomponent}/>
     );
             default:
               return null;
