@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import svg from "../Img/ar-vr-mr-training.png";
+import NewsMarkdown from './NewsMarkdown';
 
 const NewsDetail = () => {
   const location = useLocation();
@@ -10,7 +11,7 @@ const NewsDetail = () => {
     return <div className="container my-5"><h3>News item not found.</h3></div>;
   }
 
-  const { Title, Description, Image } = newsItem.attributes;
+  const { Title,Image ,markdowncomponent} = newsItem.attributes;
 
   return (
     <div>
@@ -50,7 +51,8 @@ const NewsDetail = () => {
                   />
                 )}
               </div>
-              <p className="text-muted" style={{ lineHeight: '1.8', textAlign:"justify" }}>{Description}</p>
+              {/* <p className="text-muted" style={{ lineHeight: '1.8', textAlign:"justify" }}>{Description}</p> */}
+              <NewsMarkdown data={markdowncomponent} style={{marginTop:"0px"}} />
               <div className="text-center mt-4">
                 <Link
                   to="/news"

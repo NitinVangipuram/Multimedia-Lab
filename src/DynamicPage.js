@@ -5,7 +5,7 @@ import axios from 'axios';
 import MarkdownComponent from './pages/MarkdownComponent';
 
 const fetchPageData = async (slug) => {
-    const response = await axios.get(`https://ema.iitdh.ac.in/api/api/pages?filters[slug][$eq]=${slug}&populate[Contents][populate]=*`);
+    const response = await axios.get(`https://ema.iitdh.ac.in/api/api/pages?filters[slug][$eq]=${slug}&populate=*`);
     return response.data.data[0];
   };
 
@@ -22,10 +22,17 @@ const DynamicPage = () => {
 
     if (!pageData) return <div>Loading...</div>;
 
-
+    const bannerImageUrl = pageData.attributes.BannerImage?.data?.attributes?.formats?.medium?.url;
     return (
       <div>
-              <div className="container-fluid pt-5 hero-header" style={{ background: "rgb(59,32,59)" }}>
+              <div className="container-fluid pt-5 hero-header" style={{
+           background: bannerImageUrl
+      ? `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${bannerImageUrl})`
+      : 'rgb(59,32,59)',
+
+    paddingTop: '5rem', // adjust as needed
+    paddingBottom: '5rem', // adjust as needed
+          }}>
           <div className="container pt-5">
             <div className="row g-5 pt-5">
               <div className="col-lg-6 align-self-center text-lg-start mb-lg-5">
@@ -40,7 +47,6 @@ const DynamicPage = () => {
                 </nav>
               </div>
               <div className="col-lg-6 align-self-end text-lg-end">
-                <img className="img-fluid" src={svg} alt="" style={{ maxHeight: '300px' }} />
               </div>
             </div>
           </div>

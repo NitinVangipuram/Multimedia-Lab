@@ -87,9 +87,9 @@ const News = () => {
     : item.attributes.Title}
                 </h5>
                 <p style={{ marginBottom: '10px' ,color:"black" }}>
-                  {item.attributes.Description.length > maxLength
-                    ? item.attributes.Description.slice(0, maxLength) + '...'
-                    : item.attributes.Description}
+                  {item.attributes.markdowncomponent.length > maxLength
+                    ? item.attributes.markdowncomponent.slice(0, maxLength) + '...'
+                    : item.attributes.markdowncomponent}
                 </p>
                 <Link
                   to={`/news/${item.id}`}
