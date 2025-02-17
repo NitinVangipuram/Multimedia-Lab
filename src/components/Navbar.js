@@ -9,6 +9,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 990);
   const [links, setLinks] = useState([]);
+  const [dropdowns, setDropdowns] = useState([]);
 
   const updateScreenSize = () => {
     setIsMobile(window.innerWidth <= 990);
@@ -31,6 +32,14 @@ useEffect(() => {
         setLinks(data.data); // Set the links from the fetched data
       })
       .catch(error => console.error('Error fetching navbar links:', error));
+
+    // Fetch the dropdown links from the API
+    fetch(`${apiEndpoint}/api/dropdowns?populate=*`)
+      .then(response => response.json())
+      .then(data => {
+        setDropdowns(data.data);
+      })
+      .catch(error => console.error('Error fetching dropdowns:', error));
   }, []);
   return (
     <div className="container-fluid sticky-top" style={{ backgroundColor: "white", height: isMobile ? '120px' : 'auto', paddingLeft: "0px" }}>
@@ -62,6 +71,30 @@ useEffect(() => {
                 {link.attributes.Name}
               </a>
             ))}
+            {dropdowns.map(dropdown => (
+                <div key={dropdown.id} className="nav-item dropdown">
+                  <a
+                    href="#"
+                    className="nav-link dropdown-toggle"
+                    id={`dropdown-${dropdown.id}`}
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    style={{ fontWeight: "bold", color: isMobile ? 'white' : 'black' }}
+                  >
+                    {dropdown.attributes.Name}
+                  </a>
+                  <ul className="dropdown-menu" aria-labelledby={`dropdown-${dropdown.id}`}>
+                    {dropdown.attributes.Dropdownitem.map(item => (
+                      <li key={item.id}>
+                        <Link className="dropdown-item" to={`/${item.Route}`}>
+                          {item.Name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
           </div>
         </div>
       </nav>
