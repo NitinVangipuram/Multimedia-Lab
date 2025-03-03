@@ -38,7 +38,7 @@ const Footer = () => {
                     <p class="mb-0" style={{textAlign:"justify"}}>{footer.Description}</p>
                 </div>
                  <div className="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
-              <h5 className="text-white mb-4">Our Links</h5>
+              <h5 className="text-white mb-4">Quick Links</h5>
               <div style={{ marginLeft: "100px" }}>
                 {footerLinks.map(link => (
                   <a

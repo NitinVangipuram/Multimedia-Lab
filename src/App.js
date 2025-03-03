@@ -13,12 +13,16 @@ import ResearchPage from './pages/ResearchPage';
 import PublicationsPage from './pages/PublicationsPage';
 import PublicationDetail from './pages/PublicationDetail';
 import ResearchDetail from './pages/ResearchDetail';
+import ProjectDetailPage from './pages/ProjectDetailPage';
 import NewsPage from './pages/NewsPage';
 import NewsDetail from './pages/NewsDetail';
 import '../src/styles/animate.css';
 import '../src/styles/bootstrap.min.css';
 import '../src/styles/style.css';
 import DynamicPage from './DynamicPage';
+import EventsPage from './pages/EventsPage';
+import WorkPage from './pages/WorkPage';
+
 function App() {
   return (
     <Router>
@@ -33,6 +37,9 @@ function App() {
           <Route path="/news/:id" element={<NewsDetail />} />
           <Route path="/publications" element={<PublicationsPage />} />
           <Route path="/publications/:id" element={<PublicationDetail />} />
+          <Route path="/events" element={<EventsPage />} />
+          <Route path="/work" element={<WorkPage />} />
+          <Route path="/work/:id" element={<ProjectDetailPage />} />
           <Route path="/:slug" element={<DynamicPage />} />
         </Routes>
         <Footer />

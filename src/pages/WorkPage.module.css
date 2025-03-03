@@ -1,0 +1,170 @@
+.workPage {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.workHeader {
+  margin-bottom: 3rem;
+}
+
+.navTabs {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.tabButton {
+  background: none;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tabButton.active {
+  color: #000;
+  border-bottom: 2px solid #000;
+}
+
+.sectionTitle h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.projectCard {
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  transition: transform 0.3s ease;
+}
+
+.projectCard:hover {
+  transform: translateY(-4px);
+}
+
+.projectMedia {
+  position: relative;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+}
+
+.projectMedia img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.projectOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.projectOverlay span {
+  color: white;
+  font-weight: 500;
+}
+
+.projectCard:hover .projectOverlay {
+  opacity: 1;
+}
+
+.projectInfo {
+  padding: 1.5rem;
+}
+
+.projectCategory {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.projectTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+}
+
+.projectDescription {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.projectFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.projectAuthors {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.authorAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #eaeaea;
+  display: inline-block;
+}
+
+.projectYear {
+  font-size: 0.9rem;
+  color: #666;
+} 
+.hero {
+    position: relative;
+    height: 300px;
+    width: 100vw;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+  
+  .heroOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 100%);
+  }
+  
+  .heroContent {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 2rem;
+  }
+  
+  .heroContent h1 {
+    font-size: 3rem;
+    margin: 0;
+    color: #ffffff;
+    font-weight: bold;
+  }
