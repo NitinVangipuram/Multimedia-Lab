@@ -37,24 +37,26 @@ const EventsPage = () => {
         </div>
       </div>
 
-      {/* Events Timeline Section */}
+      {/* Events Cards Section */}
       <div className="container py-5">
-        <div className="timeline">
+        <div className="row">
           {events.map((event, index) => (
-            <div key={index} className={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}>
-              <div className="timeline-content">
-                <div className="date">{new Date(event.attributes.Date).toLocaleDateString('en-US', {
-                  month: 'long',
-                  day: 'numeric',
-                  year: 'numeric'
-                })}</div>
-                <h3>{event.attributes.Title}</h3>
-                <p>{event.attributes.Description}</p>
-                {event.attributes.link && (
-                  <a href={event.attributes.link} className="event-link" target="_blank" rel="noopener noreferrer">
-                    Learn More
-                  </a>
-                )}
+            <div key={index} className="col-md-4 mb-4">
+              <div className="card">
+                <div className="card-body">
+                  <h5 className="card-title">{event.attributes.Title}</h5>
+                  <h6 className="card-subtitle mb-2 text-muted">{new Date(event.attributes.Date).toLocaleDateString('en-US', {
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric'
+                  })}</h6>
+                  <p className="card-text">{event.attributes.Description}</p>
+                  {event.attributes.link && (
+                    <a href={event.attributes.link} className="card-link" target="_blank" rel="noopener noreferrer">
+                      Learn More
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
           ))}
@@ -62,120 +64,33 @@ const EventsPage = () => {
       </div>
 
       <style jsx>{`
-        .timeline {
-          position: relative;
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 20px;
-        }
-
-        .timeline::after {
-          content: '';
-          position: absolute;
-          width: 6px;
-          background-color: #9a3b9a;
-          top: 0;
-          bottom: 0;
-          left: 50%;
-          margin-left: -3px;
-          border-radius: 3px;
-        }
-
-        .timeline-item {
-          padding: 10px 40px;
-          position: relative;
-          width: 50%;
-          margin-bottom: 30px;
-        }
-
-        .timeline-item.left {
-          left: 0;
-        }
-
-        .timeline-item.right {
-          left: 50%;
-        }
-
-        .timeline-content {
-          padding: 20px 30px;
-          background-color: white;
-          position: relative;
+        .card {
+          border: 1px solid #9a3b9a;
           border-radius: 10px;
           box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
           transition: transform 0.3s ease;
         }
 
-        .timeline-content:hover {
+        .card:hover {
           transform: translateY(-5px);
         }
 
-        .timeline-item::before {
-          content: '';
-          position: absolute;
-          width: 25px;
-          height: 25px;
-          background-color: white;
-          border: 4px solid #9a3b9a;
-          border-radius: 50%;
-          top: 15px;
-          z-index: 1;
-        }
-
-        .left::before {
-          right: -12px;
-        }
-
-        .right::before {
-          left: -13px;
-        }
-
-        .date {
-          color: #9a3b9a;
-          font-weight: bold;
-          margin-bottom: 10px;
-        }
-
-        h3 {
+        .card-title {
           color: #333;
-          margin-bottom: 15px;
         }
 
-        p {
+        .card-text {
           color: #666;
           line-height: 1.6;
         }
 
-        .event-link {
-          display: inline-block;
-          margin-top: 15px;
+        .card-link {
           color: #9a3b9a;
-          text-decoration: none;
           font-weight: bold;
-          transition: color 0.3s ease;
         }
 
-        .event-link:hover {
+        .card-link:hover {
           color: #7a2d7a;
-        }
-
-        @media screen and (max-width: 768px) {
-          .timeline::after {
-            left: 31px;
-          }
-
-          .timeline-item {
-            width: 100%;
-            padding-left: 70px;
-            padding-right: 25px;
-          }
-
-          .timeline-item.right {
-            left: 0;
-          }
-
-          .timeline-item::before {
-            left: 18px;
-          }
         }
       `}</style>
     </div>
