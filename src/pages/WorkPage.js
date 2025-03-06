@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './WorkPage.module.css';
+import { Link } from 'react-router-dom';
 
 const WorkPage = () => {
   const [activeTab, setActiveTab] = useState('projects');
@@ -10,7 +11,7 @@ const WorkPage = () => {
       title: "ALIA: Assistive LLM Ideation Agent",
       category: "Artificial Intelligence, Design creativity",
       description: "ALIA is a tool that proposes a structured ideation session involving inspirational stimuli and utilises generative AI in delivering this structure to designers in group-based ideation scenarios.",
-      thumbnail: "https://indrea.vercel.app/static/media/playseat.b31c42aec85c9383613e.jpg", // Replace with actual image path
+      thumbnail: "https://res.cloudinary.com/dau49g7jf/image/upload/v1725739745/medium_Screenshot_2024_08_29_145656_1_8b44d8b275.jpg", // Replace with actual image path
       year: "2024",
       authors: ["author1", "author2"] // Replace with actual author data
     },
@@ -25,26 +26,7 @@ const WorkPage = () => {
         <h1>Work</h1>
       </div>
     </div>
-      <div className={styles.workHeader}>
-        <div className={styles.navTabs}>
-          <button 
-            className={`${styles.tabButton} ${activeTab === 'projects' ? styles.active : ''}`}
-            onClick={() => setActiveTab('projects')}
-          >
-            PROJECTS
-          </button>
-          <button 
-            className={`${styles.tabButton} ${activeTab === 'publications' ? styles.active : ''}`}
-            onClick={() => setActiveTab('publications')}
-          >
-            PUBLICATIONS
-          </button>
-        </div>
-        
-        <div className={styles.sectionTitle}>
-          <h1>{activeTab === 'projects' ? 'Projects' : 'Publications'}</h1>
-        </div>
-      </div>
+     
 
       <div className={styles.projectsGrid}>
         {projects.map(project => (
@@ -52,7 +34,9 @@ const WorkPage = () => {
             <div className={styles.projectMedia}>
               <img src={project.thumbnail} alt={project.title} />
               <div className={styles.projectOverlay}>
+                <Link to={`/work/${project.id}`}>
                 <span>View Project →</span>
+                </Link>
               </div>
             </div>
             <div className={styles.projectInfo}>
@@ -62,7 +46,7 @@ const WorkPage = () => {
               <div className={styles.projectFooter}>
                 <div className={styles.projectAuthors}>
                   {project.authors.map((author, index) => (
-                    <span key={index} className={styles.authorAvatar}>
+                    <span key={index} >
                       {/* Add author avatar images here */}
                     </span>
                   ))}

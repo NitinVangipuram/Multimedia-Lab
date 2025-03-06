@@ -44,7 +44,7 @@
 .projectCard {
   border-radius: 12px;
   overflow: hidden;
-  background: #fff;
+  background: rgb(255, 234, 255);
   transition: transform 0.3s ease;
 }
 

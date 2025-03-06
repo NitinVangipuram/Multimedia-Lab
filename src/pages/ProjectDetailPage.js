@@ -11,7 +11,7 @@ const ProjectDetailPage = ({ project }) => {
     the power of large language models with structured ideation methodologies. This tool 
     facilitates creative workshops and brainstorming sessions by providing real-time 
     inspirational prompts and organizing ideas in meaningful ways.`,
-    thumbnail: "https://www.iitdh.ac.in/sites/default/files/2023-10/slide-02-new_3.jpg",
+    thumbnail: "https://res.cloudinary.com/dau49g7jf/image/upload/v1725739745/medium_Screenshot_2024_08_29_145656_1_8b44d8b275.jpg",
     year: "2024",
     authors: ["Author One", "Author Two"],
     youtubeId: "YOUR_YOUTUBE_VIDEO_ID",
