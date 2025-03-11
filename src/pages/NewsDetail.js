@@ -11,8 +11,7 @@ const NewsDetail = () => {
     return <div className="container my-5"><h3>News item not found.</h3></div>;
   }
 
-  const { Title,Image ,markdowncomponent} = newsItem.attributes;
-
+  const { Title,Image ,markdowncomponent ,Video} = newsItem.attributes;
   return (
     <div>
       
@@ -51,8 +50,17 @@ const NewsDetail = () => {
                   />
                 )}
               </div>
+              <div className="mb-4">
+                {Video.data && (
+                  <video controls style={{ maxWidth: '100%', height: '500px', borderRadius: '15px', overflow: 'hidden' }}>
+                    <source src={Video.data[0].attributes.url} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                )}
+              </div>
               {/* <p className="text-muted" style={{ lineHeight: '1.8', textAlign:"justify" }}>{Description}</p> */}
               <NewsMarkdown data={markdowncomponent} style={{marginTop:"0px"}} />
+             
               <div className="text-center mt-4">
                 <Link
                   to="/news"
