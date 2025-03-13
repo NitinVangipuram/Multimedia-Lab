@@ -1,5 +1,5 @@
 .workPage {
-  max-width: 1200px;
+  overflow-x: hidden;
   margin: 0 auto;
   padding: 2rem;
 }

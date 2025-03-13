@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './ProjectDetailPage.module.css';
 
 const ProjectDetailPage = ({ project }) => {
-  // This would normally come from your router/props
+  // This would normally come from your router/props/API
   const projectData = {
     title: "ALIA: Assistive LLM Ideation Agent",
     category: "Artificial Intelligence, Design creativity",
@@ -14,17 +14,22 @@ const ProjectDetailPage = ({ project }) => {
     thumbnail: "https://res.cloudinary.com/dau49g7jf/image/upload/v1725739745/medium_Screenshot_2024_08_29_145656_1_8b44d8b275.jpg",
     year: "2024",
     authors: ["Author One", "Author Two"],
-    youtubeId: "YOUR_YOUTUBE_VIDEO_ID",
+    youtubeId: "BuBORzUpjBg",
     technologies: ["React", "OpenAI", "Node.js", "MongoDB"],
     links: [
-      { title: "GitHub Repository", url: "https://github.com/..." },
+      { title: "GitHub Repository", url: "https://github.com/" },
       { title: "Live Demo", url: "https://demo..." }
-    ]
+    ],
+    // Added optional fields
+    investigator: "Lead Researcher",
+    sanctionDate: "2025-03-19",
+    duration: "10 days",
+    costOfProject: "11 lakhs"
   };
 
   return (
-    <div className={styles.projectDetail}>
-      <div className={styles.hero}>
+    <div className={styles.projectDetail} >
+      <div className={styles.hero} >
         <div className={styles.heroOverlay}></div>
         <div className={styles.heroContent}>
           <div className={styles.breadcrumb}>
@@ -37,24 +42,22 @@ const ProjectDetailPage = ({ project }) => {
 
       <div className={styles.content}>
         <div className={styles.mainContent}>
-          <div className={styles.videoContainer}>
-            <iframe
-              src={"https://www.youtube.com/embed/BuBORzUpjBg"}
-              title="Project Video"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
-          </div>
+          {projectData.youtubeId && (
+            <div className={styles.videoContainer}>
+              <iframe
+                src={`https://www.youtube.com/embed/${projectData.youtubeId}`}
+                title="Project Video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+          )}
 
           <div className={styles.description}>
             <h2>About the Project</h2>
-            <p>{projectData.fullDescription}</p>
+            <p style={{textAlign:"justify"}}>{projectData.fullDescription} </p>
           </div>
 
-          <div className={styles.gallery}>
-            {/* Add more project images here */}
-            <img src={projectData.thumbnail} alt="Project preview" />
-          </div>
         </div>
 
         <div className={styles.sidebar}>
@@ -64,6 +67,35 @@ const ProjectDetailPage = ({ project }) => {
               <span className={styles.label}>Year</span>
               <span>{projectData.year}</span>
             </div>
+            
+            {projectData.investigator && (
+              <div className={styles.detailItem}>
+                <span className={styles.label}>Investigator</span>
+                <span>{projectData.investigator}</span>
+              </div>
+            )}
+            
+            {projectData.sanctionDate && (
+              <div className={styles.detailItem}>
+                <span className={styles.label}>Sanction Date</span>
+                <span>{projectData.sanctionDate}</span>
+              </div>
+            )}
+            
+            {projectData.duration && (
+              <div className={styles.detailItem}>
+                <span className={styles.label}>Duration</span>
+                <span>{projectData.duration}</span>
+              </div>
+            )}
+            
+            {projectData.costOfProject && (
+              <div className={styles.detailItem}>
+                <span className={styles.label}>Project Cost</span>
+                <span>{projectData.costOfProject}</span>
+              </div>
+            )}
+            
             <div className={styles.detailItem}>
               <span className={styles.label}>Team</span>
               <div className={styles.authors}>
@@ -105,4 +137,4 @@ const ProjectDetailPage = ({ project }) => {
   );
 };
 
-export default ProjectDetailPage; 
+export default ProjectDetailPage;
