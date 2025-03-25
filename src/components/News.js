@@ -15,12 +15,33 @@ const News = () => {
   }, []);
 
   // Sort news by createdAt in descending order
-  const sortedNews = news.sort((a, b) => new Date(b.attributes.createdAt) - new Date(a.attributes.createdAt));
+  const sortedNews = news.sort((a, b) => new Date(b.attributes.Date) - new Date(a.attributes.Date));
 
   const maxLength = 100; // Adjust the length as needed
   const itemHeight = '450px'; // Fixed height for all news items
   const overlayColor = 'rgb(255, 234, 255)'; // Lighter overlay color
 
+  function cleanMarkdownText(text, maxLength = 100) {
+    // Replace newline characters and escaped newlines
+    text = text.replace(/\\n/g, ' ');
+    text = text.replace(/\n/g, ' ');
+    
+    // Remove extra whitespaces
+    text = text.replace(/\s+/g, ' ').trim();
+    
+    // Remove markdown bold markers
+    text = text.replace(/\*\*/g, '');
+    
+    // Remove leading '#' characters and any subsequent whitespace
+    text = text.replace(/^#+\s*/, '');
+    
+    // Truncate if longer than maxLength
+    if (text.length > maxLength) {
+      text = text.slice(0, maxLength) + '...';
+    }
+    
+    return text;
+  }
   return (
     <div style={{ padding: '50px 0', backgroundColor: '#f8f9fa' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 15px' }}>
@@ -81,14 +102,19 @@ const News = () => {
                   }}
                 >
                   <h5 style={{ marginBottom: '10px' }}>
-                    {item.attributes.Title.length > 76
-                      ? `${item.attributes.Title.substring(0, 76)}...`
+                    {item.attributes.Title.length > 50
+                      ? `${item.attributes.Title.substring(0, 50)}...`
                       : item.attributes.Title}
                   </h5>
-                  <p style={{ marginBottom: '10px', color: "black" }}>
-                    {item.attributes.markdowncomponent.length > maxLength
-                      ? item.attributes.markdowncomponent.slice(0, maxLength) + '...'
-                      : item.attributes.markdowncomponent}
+                  <p style={{ marginBottom: '10px', color: "black"  }}>
+                  <span style={{color:"rgb(154, 59, 154)" ,fontWeight:"bold"}}>
+                  Date: {item.attributes.Date}
+                  </span>
+                  
+                  <br />
+                    {item.attributes.Content.length > maxLength
+                      ? cleanMarkdownText(item.attributes.Content).slice(0, maxLength) + '...'
+                      : item.attributes.Content}
                   </p>
                   <Link
                     to={`/news/${item.id}`}

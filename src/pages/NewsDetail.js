@@ -11,7 +11,7 @@ const NewsDetail = () => {
     return <div className="container my-5"><h3>News item not found.</h3></div>;
   }
 
-  const { Title,Image ,markdowncomponent ,Video} = newsItem.attributes;
+  const { Title,Image ,Content ,Video} = newsItem.attributes;
   return (
     <div>
       
@@ -59,7 +59,7 @@ const NewsDetail = () => {
                 )}
               </div>
               {/* <p className="text-muted" style={{ lineHeight: '1.8', textAlign:"justify" }}>{Description}</p> */}
-              <NewsMarkdown data={markdowncomponent} style={{marginTop:"0px"}} />
+              <NewsMarkdown data={Content} style={{marginTop:"0px"}} />
              
               <div className="text-center mt-4">
                 <Link
