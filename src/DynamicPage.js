@@ -51,7 +51,8 @@ const DynamicPage = () => {
             </div>
           </div>
         </div>
-        {pageData.attributes.Contents.map((content) => {
+        <MarkdownComponent data={pageData.attributes.Content}/>
+        {/* {pageData.attributes.Contents.map((content) => {
           switch (content.__component) {
             case 'blogblock.blogblock':
               return (
@@ -116,7 +117,7 @@ const DynamicPage = () => {
             default:
               return null;
           }
-        })}
+        })} */}
       </div>
     );
   };
