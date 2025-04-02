@@ -16,7 +16,7 @@ const Gallery = () => {
         setLoading(true);
         const response = await fetch('https://ema.iitdh.ac.in/api/api/galleries?populate=*');
         console.log(response.json());
-        const data =  await response.json().data;
+        const data =  await response.json();
         
         if (data && Array.isArray(data)) {
           // Process API data to match our gallery items structure
