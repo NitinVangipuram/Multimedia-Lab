@@ -15,7 +15,7 @@ const Gallery = () => {
       try {
         setLoading(true);
         const response = await fetch('https://ema.iitdh.ac.in/api/api/galleries?populate=*');
-        console.log(response);
+        console.log(response.json());
         console.log(response.data);
         const data =  await response.data;
         
