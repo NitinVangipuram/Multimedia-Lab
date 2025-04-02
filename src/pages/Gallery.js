@@ -15,19 +15,19 @@ const Gallery = () => {
       try {
         setLoading(true);
         const response = await fetch('https://ema.iitdh.ac.in/api/api/galleries?populate=*');
-        console.log(response.json());
-        const data =  await response.json();
+        const responseData = await response.json();
         
-        if (data && Array.isArray(data)) {
+        // Check if response has the expected structure
+        if (responseData && responseData.data && Array.isArray(responseData.data)) {
           // Process API data to match our gallery items structure
-          const processedItems = data.map(item => {
+          const processedItems = responseData.data.map(item => {
             const mediaData = item.attributes?.Media?.data?.attributes;
             
             if (!mediaData) return null;
             
             // Determine type based on MIME type
             const type = mediaData.mime.startsWith('image/') ? 'image' : 
-                        mediaData.mime.startsWith('video/') ? 'video' : 'unknown';
+                      mediaData.mime.startsWith('video/') ? 'video' : 'unknown';
             
             // Get appropriate URL based on media type
             let url = mediaData.url;
@@ -375,6 +375,8 @@ const Gallery = () => {
                         muted
                         loop
                         playsInline
+                        onMouseOver={(e) => e.target.play()}
+                        onMouseOut={(e) => e.target.pause()}
                         onClick={e => e.stopPropagation()}
                       />
                       <div style={styles.videoIndicator}>
