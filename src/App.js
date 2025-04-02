@@ -23,6 +23,7 @@ import DynamicPage from './DynamicPage';
 import EventsPage from './pages/EventsPage';
 import WorkPage from './pages/WorkPage';
 import Gallery from './pages/Gallery';
+import DonateUs from './pages/Donate';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route path ="/research/:id" element={<ResearchDetail />} />
           <Route path="/news" element={<NewsPage />} />
           <Route path="/news/:id" element={<NewsDetail />} />
+          <Route path="/donate" element={<DonateUs />} />
           <Route path="/publications" element={<PublicationsPage />} />
           <Route path="/publications/:id" element={<PublicationDetail />} />
           <Route path="/events" element={<EventsPage />} />
