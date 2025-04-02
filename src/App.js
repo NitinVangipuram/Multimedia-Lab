@@ -22,6 +22,7 @@ import '../src/styles/style.css';
 import DynamicPage from './DynamicPage';
 import EventsPage from './pages/EventsPage';
 import WorkPage from './pages/WorkPage';
+import Gallery from './pages/Gallery';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route path="/aboutus" element={<TeamPage />} />
           <Route path="/research" element={<ResearchPage />} />
+          <Route path="/gallery" element={<Gallery/>} />
           <Route path ="/research/:id" element={<ResearchDetail />} />
           <Route path="/news" element={<NewsPage />} />
           <Route path="/news/:id" element={<NewsDetail />} />
