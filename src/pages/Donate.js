@@ -314,15 +314,14 @@ const DonateUs = () => {
           <div className="row g-5 pt-5">
             <div className="col-lg-6 align-self-center text-center text-lg-start mb-lg-5">
               <h1 className="display-4 text-white mb-4 animated slideInRight">Support Our Mission</h1>
-              <nav aria-label="breadcrumb">
-                <ol style={styles.breadcrumb}>
-                  <li>
-                    <Link style={styles.breadcrumbLink} to="/">Home</Link>
-                  </li>
-                  <li style={{ color: colors.lightText }}> / </li>
-                  <li style={styles.breadcrumbActive}>Donate</li>
-                </ol>
-              </nav>
+                <nav aria-label="breadcrumb">
+                              <ol className="breadcrumb justify-content-center justify-content-lg-start mb-0">
+                                <li className="breadcrumb-item">
+                                  <Link className="text-white" to="/">Home</Link>
+                                </li>
+                                <li className="breadcrumb-item text-white active" aria-current="page">Donate</li>
+                              </ol>
+                            </nav>
             </div>
             <div className="col-lg-6 align-self-end text-center text-lg-end">
               <img className="img-fluid" src={svg} alt="" style={{ maxHeight: '300px' }} />
