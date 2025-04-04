@@ -5,7 +5,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
 
 const Annoucements = () => {
-  const [news, setNews] = useState([]);
+  const [news, setNews] = useState([ ]);
 
   useEffect(() => {
     fetch(`${apiEndpoint}/api/announcements?populate=*`)
@@ -43,8 +43,8 @@ const Annoucements = () => {
     return text;
   }
   return (
-<div style={{ padding: '80px 0', backgroundColor: '#f0f2f5', fontFamily: 'Arial, sans-serif' }}>
-  <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 30px' }}>
+    <div style={{ padding: '80px 20px', backgroundColor: '#f0f2f5', fontFamily: 'Arial, sans-serif' }}>
+  <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 15px' }}>
     <div style={{ textAlign: 'center', marginBottom: '60px' }}>
       <div
         style={{
@@ -65,14 +65,14 @@ const Annoucements = () => {
       </div>
       <h1 style={{ 
         marginBottom: '15px', 
-        fontSize: '42px', 
+        fontSize: 'clamp(28px, 5vw, 42px)', 
         fontWeight: 'bold', 
         color: '#333',
         position: 'relative',
         display: 'inline-block',
         padding: '0 20px'
       }}>
-        Our Annoucements
+        Recent Annoucements
         <span style={{
           position: 'absolute',
           bottom: '-10px',
@@ -86,12 +86,18 @@ const Annoucements = () => {
       </h1>
     </div>
     
-    <div className="row" style={{ display: 'flex', flexWrap: 'wrap', margin: '0 -20px' }}>
+    <div style={{ 
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 350px), 1fr))',
+      gap: '40px',
+      margin: '0 auto'
+    }}>
       {sortedNews.map((item, index) => (
-        <div key={item.id} className="col-lg-4 col-md-6" style={{ padding: '0 20px', marginBottom: '40px', width: '33.33%', boxSizing: 'border-box' }}>
+        <div key={item.id} style={{ width: '100%' }}>
           <div
             style={{
-              height: itemHeight,
+              height: 'auto',
+              minHeight: itemHeight,
               borderRadius: '16px',
               overflow: 'hidden',
               boxShadow: '0 10px 30px rgba(0, 0, 0, 0.08)',
@@ -155,17 +161,23 @@ const Annoucements = () => {
               }}
             >
               <div>
-              <h5 style={{ marginBottom: '10px' }}>
-                    {item.attributes.Title.length > 50
-                      ? `${item.attributes.Title.substring(0, 50)}...`
-                      : item.attributes.Title}
-                  </h5>
+                <h5 style={{ 
+                  marginBottom: '15px', 
+                  fontSize: 'clamp(18px, 4vw, 20px)', 
+                  fontWeight: 'bold', 
+                  color: '#333',
+                  lineHeight: '1.4'
+                }}>
+                  {item.attributes.Title.length > 50
+                    ? `${item.attributes.Title.substring(0, 50)}...`
+                    : item.attributes.Title}
+                </h5>
+                
                 <p style={{ 
                   marginBottom: '20px', 
                   color: "#555", 
                   lineHeight: '1.6', 
-                  fontSize: '15px', 
-                  textAlign: 'justify',
+                  fontSize: 'clamp(14px, 3vw, 15px)' 
                 }}>
                   {item.attributes.Content.length > maxLength
                     ? cleanMarkdownText(item.attributes.Content).slice(0, maxLength) + '...'
@@ -182,7 +194,7 @@ const Annoucements = () => {
                   color: '#9a3b9a',
                   textDecoration: 'none',
                   fontWeight: 'bold',
-                  fontSize: '15px',
+                  fontSize: 'clamp(14px, 3vw, 15px)',
                   position: 'relative',
                   transition: 'padding-right 0.3s ease',
                 }}
@@ -209,7 +221,7 @@ const Annoucements = () => {
     </div>
   </div>
 </div>
-  );
+  )
 };
 
 export default Annoucements;
