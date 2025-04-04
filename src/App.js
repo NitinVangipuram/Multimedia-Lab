@@ -24,6 +24,8 @@ import EventsPage from './pages/EventsPage';
 import WorkPage from './pages/WorkPage';
 import Gallery from './pages/Gallery';
 import DonateUs from './pages/Donate';
+import AnnoucementDetail from './pages/AnnoucementDetail';
+import AnnoucementsPage from './pages/AnnoucementsPage';
 
 function App() {
   return (
@@ -38,6 +40,8 @@ function App() {
           <Route path ="/research/:id" element={<ResearchDetail />} />
           <Route path="/news" element={<NewsPage />} />
           <Route path="/news/:id" element={<NewsDetail />} />
+          <Route path ="/announcements" element={<AnnoucementsPage />} />
+          <Route path="/announcements/:id" element={<AnnoucementDetail/>} />
           <Route path="/donate" element={<DonateUs />} />
           <Route path="/publications" element={<PublicationsPage />} />
           <Route path="/publications/:id" element={<PublicationDetail />} />
