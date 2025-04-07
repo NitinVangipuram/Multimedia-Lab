@@ -42,7 +42,7 @@ useEffect(() => {
       .catch(error => console.error('Error fetching dropdowns:', error));
   }, []);
   return (
-    <div className="container-fluid sticky-top" style={{ backgroundColor: "white", height: isMobile ? '120px' : 'auto', paddingLeft: "0px" ,zIndex:"0"}}>
+    <div className="container-fluid sticky-top" style={{ backgroundColor: "white", height: isMobile ? '120px' : 'auto', paddingLeft: "0px"}}>
     <div className="container">
       <nav className="navbar navbar-expand-lg navbar-dark p-0">
         <Link to="/" className="navbar-brand">
