@@ -23,7 +23,7 @@ const WorkPage = () => {
         <div className={styles.hero}>
       <div className={styles.heroOverlay}></div>
       <div className={styles.heroContent}>
-        <h1>Work</h1>
+        <h1>Projects</h1>
       </div>
     </div>
      
@@ -34,7 +34,7 @@ const WorkPage = () => {
             <div className={styles.projectMedia}>
               <img src={project.thumbnail} alt={project.title} />
               <div className={styles.projectOverlay}>
-                <Link to={`/work/${project.id}`}>
+                <Link to={`/projects/${project.id}`}>
                 <span>View Project →</span>
                 </Link>
               </div>

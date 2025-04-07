@@ -26,6 +26,7 @@ import Gallery from './pages/Gallery';
 import DonateUs from './pages/Donate';
 import AnnoucementDetail from './pages/AnnoucementDetail';
 import AnnoucementsPage from './pages/AnnoucementsPage';
+import ResearchThrustAreas from './pages/ResearchThrustAreas';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="/research" element={<ResearchPage />} />
           <Route path="/gallery" element={<Gallery/>} />
           <Route path ="/research/:id" element={<ResearchDetail />} />
+          <Route path="/thrust" element={<ResearchThrustAreas />} />
           <Route path="/news" element={<NewsPage />} />
           <Route path="/news/:id" element={<NewsDetail />} />
           <Route path ="/announcements" element={<AnnoucementsPage />} />
@@ -46,8 +48,8 @@ function App() {
           <Route path="/publications" element={<PublicationsPage />} />
           <Route path="/publications/:id" element={<PublicationDetail />} />
           <Route path="/events" element={<EventsPage />} />
-          <Route path="/work" element={<WorkPage />} />
-          <Route path="/work/:id" element={<ProjectDetailPage />} />
+          <Route path="/projects" element={<WorkPage />} />
+          <Route path="/projects/:id" element={<ProjectDetailPage />} />
           <Route path="/:slug" element={<DynamicPage />} />
         </Routes>
         <Footer />
