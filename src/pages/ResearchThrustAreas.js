@@ -1,68 +1,47 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import svg from "../Img/ar-vr-mr-training.png";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function ResearchThrustAreas() {
   const [expandedArea, setExpandedArea] = useState(null);
-  
-  const thrustAreas = [
-    {
-      id: 1,
-      title: "Artificial Intelligence",
-      description: "Research focusing on machine learning algorithms, neural networks, natural language processing, and computer vision to develop intelligent systems that can perceive, learn, reason, and act autonomously.",
-      projects: [
-        "Deep Learning for Medical Imaging",
-        "Reinforcement Learning in Robotics",
-        "Ethical AI Development",
-        "Explainable AI Systems"
-      ]
-    },
-    {
-      id: 2,
-      title: "Quantum Computing",
-      description: "Exploring quantum mechanics principles to develop computational systems that can solve complex problems exponentially faster than classical computers.",
-      projects: [
-        "Quantum Algorithm Development",
-        "Quantum Error Correction",
-        "Quantum Materials Research",
-        "Quantum Cryptography"
-      ]
-    },
-    {
-      id: 3,
-      title: "Sustainable Energy",
-      description: "Researching renewable energy sources, energy storage solutions, and efficient distribution systems to address climate change and promote environmental sustainability.",
-      projects: [
-        "Advanced Solar Cell Technology",
-        "Grid-Scale Energy Storage",
-        "Biofuel Development",
-        "Smart Grid Integration"
-      ]
-    },
-    {
-      id: 4,
-      title: "Biotechnology & Genomics",
-      description: "Investigating cellular and molecular processes to develop new treatments, diagnostic tools, and preventative measures for various diseases and health conditions.",
-      projects: [
-        "CRISPR Gene Editing Applications",
-        "Synthetic Biology",
-        "Personalized Medicine",
-        "Bioinformatics"
-      ]
-    },
-    {
-      id: 5,
-      title: "Advanced Materials",
-      description: "Designing and developing novel materials with specific properties for applications in electronics, medicine, construction, transportation, and energy sectors.",
-      projects: [
-        "Nanomaterials",
-        "Metamaterials",
-        "Biodegradable Polymers",
-        "Smart Textiles"
-      ]
-    }
-  ];
+  const [thrustAreas, setThrustAreas] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
+  useEffect(() => {
+    const fetchThrustAreas = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(`${apiEndpoint}/api/thrust-areas`);
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        
+        const responseData = await response.json();
+        
+        // Transform the API data to match our component's expected format
+        const formattedData = responseData.data.map(item => ({
+          id: item.id,
+          title: item.attributes.Title,
+          description: item.attributes.Description,
+          // Since the API data doesn't have projects, we'll provide some default ones
+          // In a real application, you would fetch these from another endpoint or include them in this one
+         
+        }));
+        
+        setThrustAreas(formattedData);
+        setLoading(false);
+      } catch (err) {
+        console.error("Error fetching thrust areas:", err);
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+
+    fetchThrustAreas();
+  }, []);
 
   const toggleExpand = (id) => {
     if (expandedArea === id) {
@@ -173,16 +152,23 @@ export default function ResearchThrustAreas() {
     cursor: 'pointer'
   };
 
-  const footerStyle = {
-    backgroundColor: '#9a3b9a',
-    padding: '16px',
+  const loadingStyle = {
     textAlign: 'center',
-    color: '#ffffff'
+    padding: '40px',
+    fontSize: '20px',
+    color: '#9a3b9a'
+  };
+
+  const errorStyle = {
+    textAlign: 'center',
+    padding: '40px',
+    fontSize: '20px',
+    color: 'red'
   };
 
   return (
     <div style={containerStyle}>
-       <div className="container-fluid hero-header" style={{ background: "rgb(59,32,59)", marginBottom: "40px" }}>
+      <div className="container-fluid hero-header" style={{ background: "rgb(59,32,59)", marginBottom: "40px" }}>
         <div className="container pt-5">
           <div className="row g-5 pt-5">
             <div className="col-lg-6 align-self-center text-center text-lg-start mb-lg-5">
@@ -205,46 +191,40 @@ export default function ResearchThrustAreas() {
       
       <main style={mainContentStyle}>
         <p style={introTextStyle}>
-          Our institution focuses on five key research areas that address critical challenges and opportunities in science and technology.
+          Our institution focuses on key research areas that address critical challenges and opportunities in science and technology.
         </p>
         
-        <div style={gridContainerStyle}>
-          {thrustAreas.map(area => (
-            <div 
-              key={area.id} 
-              style={{
-                ...cardStyle,
-                transform: expandedArea === area.id ? 'scale(1.05)' : 'scale(1)'
-              }}
-              onClick={() => toggleExpand(area.id)}
-            >
-              <div style={cardHeaderStyle}>
-                <h2 style={cardTitleStyle}>{area.title}</h2>
-              </div>
+        {loading ? (
+          <div style={loadingStyle}>Loading thrust areas...</div>
+        ) : error ? (
+          <div style={errorStyle}>Error: {error}. Please try again later.</div>
+        ) : (
+          <div style={gridContainerStyle}>
+            {thrustAreas.map(area => (
+              <div 
+                key={area.id} 
+                style={{
+                  ...cardStyle,
+                
+                }}
+                onClick={() => toggleExpand(area.id)}
+              >
+                <div style={cardHeaderStyle}>
+                  <h2 style={cardTitleStyle}>{area.title}</h2>
+                </div>
+                
+                <div style={cardBodyStyle}>
+                  <p style={descriptionStyle}>{area.description}</p>
+                  
+                
+                  
               
-              <div style={cardBodyStyle}>
-                <p style={descriptionStyle}>{area.description}</p>
-                
-                {expandedArea === area.id && (
-                  <div style={{ marginTop: '16px' }}>
-                    <h3 style={projectsHeaderStyle}>Key Projects:</h3>
-                    <ul style={projectListStyle}>
-                      {area.projects.map((project, index) => (
-                        <li key={index} style={projectItemStyle}>{project}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-                
-                <button style={buttonStyle}>
-                  {expandedArea === area.id ? 'Show Less' : 'Learn More'}
-                </button>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </main>
-      
     </div>
   );
 }
