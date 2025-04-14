@@ -1,63 +1,17 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import svg from "../Img/ar-vr-mr-training.png"; // Reusing the same SVG from Gallery component
+import svg from "../Img/ar-vr-mr-training.png";
 
 const DonateUs = () => {
-  // State for form inputs
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    amount: '',
-    donationType: 'one-time',
-    paymentMethod: 'card',
-    message: ''
-  });
+  // State for donation modal
+  const [showModal, setShowModal] = useState(false);
   
-  // State for selected donation amount
-  const [selectedAmount, setSelectedAmount] = useState(null);
-  
-  // Handle input changes
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
-    
-    // Reset selected amount pill if user types a custom amount
-    if (name === 'amount') {
-      setSelectedAmount(null);
-    }
-  };
-  
-  // Handle donation amount selection
-  const handleAmountSelect = (amount) => {
-    setSelectedAmount(amount);
-    setFormData(prevState => ({
-      ...prevState,
-      amount: amount.toString()
-    }));
-  };
-  
-  // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Process donation (would connect to payment gateway in a real implementation)
-    console.log('Donation submission:', formData);
-    alert('Thank you for your generous donation!');
-  };
-  
-  // Define the color scheme from the gallery component
+  // Define the color scheme
   const colors = {
     primary: 'rgb(59, 32, 59)',     // Deep purple
     lightBg: 'rgb(255, 234, 255)',  // Light pink
-    mediumBg: 'rgb(245, 224, 245)', // Medium pink
     white: '#ffffff',
-    darkText: 'rgb(59, 32, 59)',
-    lightText: 'rgb(255, 234, 255)',
     accent: '#8b4a8b',              // Lighter purple for accents
-    success: '#4BB543',
-    error: '#d32f2f'
   };
   
   // Styles object
@@ -67,261 +21,200 @@ const DonateUs = () => {
       minHeight: '100vh',
       padding: '0',
       fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-      color: colors.darkText,
+      color: colors.primary,
     },
     heroHeader: {
       background: colors.primary,
-      marginBottom: '40px',
-      padding: '2rem 0'
+      padding: '4rem 0',
+      textAlign: 'center',
+      marginBottom: '3rem'
     },
     mainContent: {
-      maxWidth: '1200px',
+      maxWidth: '900px',
       margin: '0 auto',
       padding: '0 2rem 5rem',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
     },
-    twoColumn: {
-      display: 'flex',
-      width: '100%',
-      gap: '2rem',
-      flexWrap: 'wrap'
+    heroTitle: {
+      fontSize: '3rem',
+      fontWeight: '700',
+      color: colors.white,
+      marginBottom: '1rem',
     },
-    leftColumn: {
-      flex: '1 1 400px',
-      marginBottom: '2rem'
+    heroSubtitle: {
+      fontSize: '1.2rem',
+      color: colors.lightBg,
+      marginBottom: '2rem',
+      maxWidth: '600px',
+      margin: '0 auto 2rem',
     },
-    rightColumn: {
-      flex: '1 1 500px',
+    card: {
       backgroundColor: colors.white,
       borderRadius: '12px',
       boxShadow: '0 4px 20px rgba(59, 32, 59, 0.1)',
-      padding: '2rem',
-      marginBottom: '2rem'
+      padding: '2.5rem',
+      width: '100%',
+      maxWidth: '800px',
+      margin: '-3rem auto 0',
+      position: 'relative',
+      zIndex: '2',
+      marginTop: '2rem',
     },
-    donationHeader: {
+    sectionTitle: {
       fontSize: '2rem',
       fontWeight: '700',
       marginBottom: '1.5rem',
       color: colors.primary,
+      textAlign: 'center',
     },
-    subheading: {
-      fontSize: '1.2rem',
+    paragraph: {
+      fontSize: '1.1rem',
       lineHeight: '1.6',
       marginBottom: '1.5rem',
-      color: colors.darkText,
+      color: colors.primary,
+      textAlign: 'center',
     },
-    impact: {
-      backgroundColor: colors.primary,
-      borderRadius: '12px',
-      padding: '1.5rem',
-      color: colors.white,
-      marginBottom: '2rem',
-    },
-    impactHeader: {
-      fontSize: '1.5rem',
-      fontWeight: '600',
-      marginBottom: '1rem',
-      color: colors.white,
+    impactGrid: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+      gap: '1.5rem',
+      marginTop: '2rem',
+      marginBottom: '2.5rem',
     },
     impactItem: {
       display: 'flex',
+      flexDirection: 'column',
       alignItems: 'center',
-      marginBottom: '1rem',
+      textAlign: 'center',
+      padding: '1.5rem',
+      backgroundColor: colors.lightBg,
+      borderRadius: '12px',
+      transition: 'transform 0.3s ease',
     },
     impactIcon: {
-      fontSize: '1.5rem',
-      marginRight: '1rem',
-      backgroundColor: 'rgba(255, 234, 255, 0.2)',
-      width: '40px',
-      height: '40px',
+      fontSize: '2.5rem',
+      marginBottom: '1rem',
+      backgroundColor: 'rgba(59, 32, 59, 0.1)',
+      width: '70px',
+      height: '70px',
       borderRadius: '50%',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
     },
-    testimonial: {
-      backgroundColor: colors.white,
-      borderRadius: '12px',
-      padding: '1.5rem',
-      marginBottom: '2rem',
-      boxShadow: '0 4px 15px rgba(59, 32, 59, 0.08)',
-      borderLeft: `4px solid ${colors.accent}`,
-    },
-    formGroup: {
-      marginBottom: '1.5rem',
-    },
-    label: {
-      display: 'block',
-      fontSize: '0.9rem',
+    impactTitle: {
+      fontSize: '1.2rem',
       fontWeight: '600',
       marginBottom: '0.5rem',
-      color: colors.darkText,
-    },
-    input: {
-      width: '100%',
-      padding: '0.75rem',
-      fontSize: '1rem',
-      border: '1px solid rgba(59, 32, 59, 0.2)',
-      borderRadius: '6px',
-      outline: 'none',
-      transition: 'border-color 0.2s ease',
-    },
-    inputFocus: {
-      borderColor: colors.primary,
-      boxShadow: '0 0 0 2px rgba(59, 32, 59, 0.1)',
-    },
-    select: {
-      width: '100%',
-      padding: '0.75rem',
-      fontSize: '1rem',
-      border: '1px solid rgba(59, 32, 59, 0.2)',
-      borderRadius: '6px',
-      backgroundColor: colors.white,
-      outline: 'none',
-      cursor: 'pointer',
-    },
-    textarea: {
-      width: '100%',
-      padding: '0.75rem',
-      fontSize: '1rem',
-      border: '1px solid rgba(59, 32, 59, 0.2)',
-      borderRadius: '6px',
-      minHeight: '120px',
-      outline: 'none',
-      fontFamily: 'inherit',
-      resize: 'vertical',
-    },
-    amountContainer: {
-      display: 'flex',
-      gap: '0.75rem',
-      flexWrap: 'wrap',
-      marginBottom: '1rem',
-    },
-    amountPill: {
-      padding: '0.75rem 1.25rem',
-      borderRadius: '50px',
-      border: `1px solid ${colors.primary}`,
-      backgroundColor: 'transparent',
       color: colors.primary,
-      fontSize: '1rem',
-      fontWeight: '600',
-      cursor: 'pointer',
-      transition: 'all 0.2s ease',
     },
-    amountPillSelected: {
+    donateButton: {
       backgroundColor: colors.primary,
       color: colors.white,
-    },
-    row: {
-      display: 'flex',
-      gap: '1rem',
-      marginBottom: '1.5rem',
-    },
-    column: {
-      flex: '1 1 0',
-    },
-    radioContainer: {
-      display: 'flex',
-      gap: '1.5rem',
-      marginBottom: '1rem',
-    },
-    radioLabel: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '0.5rem',
-      cursor: 'pointer',
-    },
-    submitButton: {
-      backgroundColor: colors.primary,
-      color: colors.white,
-      padding: '1rem 2rem',
+      padding: '1rem 3rem',
       borderRadius: '50px',
-      fontSize: '1.1rem',
+      fontSize: '1.2rem',
       fontWeight: '600',
       border: 'none',
       cursor: 'pointer',
-      width: '100%',
-      transition: 'all 0.2s ease',
+      transition: 'all 0.3s ease',
       marginTop: '1rem',
+      display: 'block',
+      margin: '2rem auto 0',
     },
-    submitButtonHover: {
+    donateButtonHover: {
       backgroundColor: colors.accent,
-      transform: 'translateY(-2px)',
-      boxShadow: '0 4px 15px rgba(59, 32, 59, 0.2)',
+      transform: 'translateY(-3px)',
+      boxShadow: '0 10px 25px rgba(59, 32, 59, 0.3)',
     },
-    secureNotice: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      gap: '0.5rem',
+    footer: {
+      textAlign: 'center',
+      marginTop: '3rem',
       fontSize: '0.9rem',
       color: 'rgba(59, 32, 59, 0.7)',
-      marginTop: '1rem',
     },
-    paymentIcons: {
+    modal: {
+      position: 'fixed',
+      top: '0',
+      left: '0',
+      right: '0',
+      bottom: '0',
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
       display: 'flex',
       justifyContent: 'center',
-      gap: '1rem',
-      marginTop: '1.5rem',
+      alignItems: 'center',
+      zIndex: '1000',
     },
-    paymentIcon: {
-      fontSize: '2rem',
-      color: 'rgba(59, 32, 59, 0.6)',
-    },
-    featuredDonors: {
-      backgroundColor: colors.mediumBg,
-      borderRadius: '12px',
-      padding: '1.5rem',
-      marginTop: '2rem',
-    },
-    donorsList: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '1rem',
-      marginTop: '1rem',
-    },
-    donorBadge: {
+    modalContent: {
       backgroundColor: colors.white,
-      borderRadius: '50px',
-      padding: '0.5rem 1rem',
-      fontSize: '0.9rem',
-      fontWeight: '500',
-      boxShadow: '0 2px 8px rgba(59, 32, 59, 0.08)',
+      borderRadius: '12px',
+      padding: '2rem',
+      width: '90%',
+      maxWidth: '500px',
+      boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)',
     },
-    breadcrumb: {
+    modalHeader: {
       display: 'flex',
-      gap: '0.5rem',
-      fontSize: '0.95rem',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginBottom: '1.5rem',
     },
-    breadcrumbLink: {
-      color: colors.lightText,
-      textDecoration: 'none',
+    modalTitle: {
+      fontSize: '1.5rem',
+      fontWeight: '700',
+      color: colors.primary,
     },
-    breadcrumbActive: {
-      color: colors.lightText,
-      opacity: '0.8',
-    }
+    closeButton: {
+      background: 'none',
+      border: 'none',
+      fontSize: '1.5rem',
+      color: colors.primary,
+      cursor: 'pointer',
+    },
+    modalText: {
+      fontSize: '1.1rem',
+      marginBottom: '1.5rem',
+    },
+    highlight: {
+      color: colors.primary,
+      fontWeight: '700',
+    },
+    divider: {
+      height: '4px',
+      background: `linear-gradient(90deg, ${colors.primary}, ${colors.lightBg})`,
+      width: '60px',
+      margin: '0 auto 2.5rem',
+      borderRadius: '2px',
+    },
   };
 
   const [hoverButton, setHoverButton] = useState(false);
 
   return (
     <div style={styles.container}>
-      <div className="container-fluid hero-header" style={styles.heroHeader}>
+      {/* Hero Section */}
+      {/* <div style={styles.heroHeader}>
+        <h1 style={styles.heroTitle}>Support Our Mission</h1>
+        <p style={styles.heroSubtitle}>
+          Your donation directly supports our mission to advance emerging technologies 
+          and create innovative solutions that improve lives.
+        </p>
+      </div> */}
+      <div className="container-fluid hero-header" style={{ background: "rgb(59,32,59)", marginBottom: "40px" }}>
         <div className="container pt-5">
           <div className="row g-5 pt-5">
             <div className="col-lg-6 align-self-center text-center text-lg-start mb-lg-5">
               <h1 className="display-4 text-white mb-4 animated slideInRight">Support Our Mission</h1>
-                <nav aria-label="breadcrumb">
-                              <ol className="breadcrumb justify-content-center justify-content-lg-start mb-0">
-                                <li className="breadcrumb-item">
-                                  <Link className="text-white" to="/">Home</Link>
-                                </li>
-                                <li className="breadcrumb-item text-white active" aria-current="page">Donate</li>
-                              </ol>
-                            </nav>
+              <nav aria-label="breadcrumb">
+                <ol className="breadcrumb justify-content-center justify-content-lg-start mb-0">
+                  <li className="breadcrumb-item">
+                    <Link className="text-white" to="/">Home</Link>
+                  </li>
+                  <li className="breadcrumb-item text-white active" aria-current="page">Donate Us</li>
+                </ol>
+              </nav>
             </div>
             <div className="col-lg-6 align-self-end text-center text-lg-end">
               <img className="img-fluid" src={svg} alt="" style={{ maxHeight: '300px' }} />
@@ -329,213 +222,84 @@ const DonateUs = () => {
           </div>
         </div>
       </div>
-      
+      {/* Main Content */}
       <main style={styles.mainContent}>
-        <div style={styles.twoColumn}>
-          <div style={styles.leftColumn}>
-            <h2 style={styles.donationHeader}>Help Us Make a Difference</h2>
-            <p style={styles.subheading}>
-              Your donation directly supports our mission to advance emerging technologies and create
-              innovative solutions that improve lives. Every contribution, no matter the size, helps us
-              continue our important work.
-            </p>
-            
-            <div style={styles.impact}>
-              <h3 style={styles.impactHeader}>Your Impact</h3>
-              
-              <div style={styles.impactItem}>
-                <span style={styles.impactIcon}>🎓</span>
-                <span>Support student research </span>
-              </div>
-              
-              <div style={styles.impactItem}>
-                <span style={styles.impactIcon}>💡</span>
-                <span>Fund innovative technology development</span>
-              </div>
-              
-              <div style={styles.impactItem}>
-                <span style={styles.impactIcon}>🌍</span>
-                <span>Create solutions for global challenges</span>
-              </div>
-              
-              <div style={styles.impactItem}>
-                <span style={styles.impactIcon}>🔬</span>
-                <span>Enable cutting-edge research facilities</span>
-              </div>
+        <div style={styles.card}>
+          <h2 style={styles.sectionTitle}>Help Us Make a Difference</h2>
+          <div style={styles.divider}></div>
+          <p style={styles.paragraph}>
+            Every contribution, no matter the size, helps us continue our important work.
+            Join our community of supporters who believe in the power of technology to transform lives.
+          </p>
+          
+          <div style={styles.impactGrid}>
+            <div style={styles.impactItem}>
+              <div style={styles.impactIcon}>🎓</div>
+              <h3 style={styles.impactTitle}>Student Research</h3>
+              <p>Support innovative student projects and educational initiatives</p>
             </div>
             
-            <div style={styles.testimonial}>
-              <p style={{ fontStyle: 'italic', marginBottom: '1rem' }}>
-                "The support we received has been transformative for our research. We've been able to develop
-                technologies that are making a real difference in accessibility and education."
-              </p>
-              <strong>- John Doe </strong>
+            <div style={styles.impactItem}>
+              <div style={styles.impactIcon}>💡</div>
+              <h3 style={styles.impactTitle}>Innovation</h3>
+              <p>Fund development of breakthrough technologies</p>
             </div>
             
-            <div style={styles.featuredDonors}>
-              <h3 style={{ fontSize: '1.2rem', marginBottom: '0.75rem' }}>Our Generous Supporters</h3>
-              <div style={styles.donorsList}>
-                <span style={styles.donorBadge}>Tech Foundation</span>
-                <span style={styles.donorBadge}>Global Innovations Inc.</span>
-                <span style={styles.donorBadge}>Future Labs</span>
-                <span style={styles.donorBadge}>Community Trust</span>
-                <span style={styles.donorBadge}>+ 200 individuals</span>
-              </div>
+            <div style={styles.impactItem}>
+              <div style={styles.impactIcon}>🌍</div>
+              <h3 style={styles.impactTitle}>Global Impact</h3>
+              <p>Create solutions for pressing worldwide challenges</p>
             </div>
           </div>
           
-          <div style={styles.rightColumn}>
-            <h3 style={{ fontSize: '1.5rem', marginBottom: '1.5rem', color: colors.primary }}>Make Your Donation</h3>
-            
-            <form onSubmit={handleSubmit}>
-              <div style={styles.formGroup}>
-                <label style={styles.label}>Select Amount</label>
-                <div style={styles.amountContainer}>
-                  {[25, 50, 100, 250].map(amount => (
-                    <button
-                      key={amount}
-                      type="button"
-                      style={{
-                        ...styles.amountPill,
-                        ...(selectedAmount === amount ? styles.amountPillSelected : {})
-                      }}
-                      onClick={() => handleAmountSelect(amount)}
-                    >
-                      ${amount}
-                    </button>
-                  ))}
-                </div>
-                
-                <div style={styles.formGroup}>
-                  <label style={styles.label}>Custom Amount ($)</label>
-                  <input
-                    type="number"
-                    name="amount"
-                    value={formData.amount}
-                    onChange={handleInputChange}
-                    placeholder="Enter amount"
-                    style={styles.input}
-                  />
-                </div>
-              </div>
-              
-              <div style={styles.formGroup}>
-                <label style={styles.label}>Donation Type</label>
-                <div style={styles.radioContainer}>
-                  <label style={styles.radioLabel}>
-                    <input
-                      type="radio"
-                      name="donationType"
-                      value="one-time"
-                      checked={formData.donationType === 'one-time'}
-                      onChange={handleInputChange}
-                    />
-                    One-time
-                  </label>
-                  <label style={styles.radioLabel}>
-                    <input
-                      type="radio"
-                      name="donationType"
-                      value="monthly"
-                      checked={formData.donationType === 'monthly'}
-                      onChange={handleInputChange}
-                    />
-                    Monthly
-                  </label>
-                  <label style={styles.radioLabel}>
-                    <input
-                      type="radio"
-                      name="donationType"
-                      value="annual"
-                      checked={formData.donationType === 'annual'}
-                      onChange={handleInputChange}
-                    />
-                    Annual
-                  </label>
-                </div>
-              </div>
-              
-              <div style={styles.row}>
-                <div style={styles.column}>
-                  <div style={styles.formGroup}>
-                    <label style={styles.label}>Full Name</label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      placeholder="John Doe"
-                      style={styles.input}
-                      required
-                    />
-                  </div>
-                </div>
-                <div style={styles.column}>
-                  <div style={styles.formGroup}>
-                    <label style={styles.label}>Email Address</label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      placeholder="john@example.com"
-                      style={styles.input}
-                      required
-                    />
-                  </div>
-                </div>
-              </div>
-              
-              <div style={styles.formGroup}>
-                <label style={styles.label}>Payment Method</label>
-                <select
-                  name="paymentMethod"
-                  value={formData.paymentMethod}
-                  onChange={handleInputChange}
-                  style={styles.select}
-                >
-                  <option value="card">Credit/Debit Card</option>
-                  <option value="paypal">PayPal</option>
-                  <option value="bank">Bank Transfer</option>
-                </select>
-              </div>
-              
-              <div style={styles.formGroup}>
-                <label style={styles.label}>Message (Optional)</label>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  placeholder="Share why you're supporting us..."
-                  style={styles.textarea}
-                ></textarea>
-              </div>
-              
-              <button
-                type="submit"
-                style={{
-                  ...styles.submitButton,
-                  ...(hoverButton ? styles.submitButtonHover : {})
-                }}
-                onMouseEnter={() => setHoverButton(true)}
-                onMouseLeave={() => setHoverButton(false)}
-              >
-                Donate Now
-              </button>
-              
-              <div style={styles.secureNotice}>
-                <span>🔒</span> All transactions are secure and encrypted
-              </div>
-              
-              <div style={styles.paymentIcons}>
-                <span style={styles.paymentIcon}>💳</span>
-                <span style={styles.paymentIcon}>📱</span>
-                <span style={styles.paymentIcon}>🏦</span>
-              </div>
-            </form>
-          </div>
+          <button
+            style={{
+              ...styles.donateButton,
+              ...(hoverButton ? styles.donateButtonHover : {})
+            }}
+            onMouseEnter={() => setHoverButton(true)}
+            onMouseLeave={() => setHoverButton(false)}
+            onClick={() => setShowModal(true)}
+          >
+            Donate Now
+          </button>
+          
+          <p style={styles.footer}>
+            <span>🔒</span> All transactions are secure and encrypted
+          </p>
         </div>
       </main>
+      
+      {/* Modal */}
+      {showModal && (
+        <div style={styles.modal}>
+          <div style={styles.modalContent}>
+            <div style={styles.modalHeader}>
+              <h3 style={styles.modalTitle}>Thank You!</h3>
+              <button style={styles.closeButton} onClick={() => setShowModal(false)}>×</button>
+            </div>
+            <p style={styles.modalText}>
+              Thank you for your interest in supporting our mission. 
+              In a fully implemented version, this would connect to a payment processor.
+            </p>
+            <p style={styles.modalText}>
+              For now, please contact us at <span style={styles.highlight}>donations@example.org</span> to 
+              complete your contribution.
+            </p>
+            <button
+              style={{
+                ...styles.donateButton,
+                ...(hoverButton ? styles.donateButtonHover : {})
+              }}
+              onMouseEnter={() => setHoverButton(true)}
+              onMouseLeave={() => setHoverButton(false)}
+              onClick={() => setShowModal(false)}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
