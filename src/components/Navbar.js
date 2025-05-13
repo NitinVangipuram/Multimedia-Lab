@@ -17,16 +17,13 @@ const Navbar = ({ onSearchResults }) => {
   const [isLoading, setIsLoading] = useState(false);
   const searchRef = useRef(null);
 
-  const updateScreenSize = () => {
-    setIsMobile(window.innerWidth <= 990);
-  };
+  const updateScreenSize = () => setIsMobile(window.innerWidth <= 990);
 
   useEffect(() => {
     window.addEventListener('resize', updateScreenSize);
     return () => window.removeEventListener('resize', updateScreenSize);
   }, []);
 
-  // Close search results when clicking outside
   useEffect(() => {
     function handleClickOutside(event) {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
@@ -35,135 +32,101 @@ const Navbar = ({ onSearchResults }) => {
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [searchRef]);
+  }, []);
 
-  const toggleNavbar = () => {
-    setIsOpen(!isOpen);
-  };
+  const toggleNavbar = () => setIsOpen(!isOpen);
 
   const toggleSearch = () => {
     setShowSearch(!showSearch);
-    if (!showSearch) {
-      setSearchResults(null);
-      setSearchQuery('');
-      
-      // Reset search results in parent component
-      if (onSearchResults) {
-        onSearchResults(null, false);
-      }
-    }
+    setSearchResults(null);
+    setSearchQuery('');
+    if (onSearchResults) onSearchResults(null, false);
   };
 
   const handleSearch = async (e) => {
     e.preventDefault();
     if (!searchQuery.trim()) return;
-    
+
     setIsLoading(true);
     try {
       const response = await fetch(`${apiEndpoint}/api/fuzzy-search/search?query=${encodeURIComponent(searchQuery)}`);
       const data = await response.json();
-      console.log('Search results:', data);
       setSearchResults(data);
-      
-      // Pass the search results to the parent component if the callback exists
-      if (onSearchResults) {
-        onSearchResults(data, true);
-      }
+      if (onSearchResults) onSearchResults(data, true);
     } catch (error) {
-      console.error('Error searching:', error);
       setSearchResults({ error: 'Failed to fetch search results' });
-      
-      // Pass the error to the parent component
-      if (onSearchResults) {
-        onSearchResults({ error: 'Failed to fetch search results' }, true);
-      }
+      if (onSearchResults) onSearchResults({ error: 'Failed to fetch search results' }, true);
     } finally {
       setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    // Fetch the navbar links from the API
     fetch(`${apiEndpoint}/api/navbars`)
-      .then(response => response.json())
-      .then(data => {
-        setLinks(data.data); // Set the links from the fetched data
-      })
-      .catch(error => console.error('Error fetching navbar links:', error));
-    
-    // Fetch the dropdown links from the API
+      .then(res => res.json())
+      .then(data => setLinks(data.data))
+      .catch(err => console.error(err));
+
     fetch(`${apiEndpoint}/api/dropdowns?populate=*`)
-      .then(response => response.json())
-      .then(data => {
-        setDropdowns(data.data);
-      })
-      .catch(error => console.error('Error fetching dropdowns:', error));
+      .then(res => res.json())
+      .then(data => setDropdowns(data.data))
+      .catch(err => console.error(err));
   }, []);
 
-  // Format date for display
-  const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric'
-    });
-  };
+  const formatDate = (dateString) => new Date(dateString).toLocaleDateString('en-US', {
+    month: 'long', day: 'numeric', year: 'numeric'
+  });
 
-  // Render search results based on type
+  const renderSection = (title, items, pathBuilder) => (
+    <div style={{ padding: '20px' }}>
+      <h5 style={{ marginBottom: '15px' }}>{title}</h5>
+      {items.map(item => (
+        <div key={item.id} style={{ marginBottom: '15px' }}>
+          <Link to={pathBuilder(item)} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <div style={{
+              border: '1px solid #ccc',
+              borderRadius: '6px',
+              padding: '15px',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+            }}>
+              <h5>{item.Title}</h5>
+              <p>{item.Description} {item.Content}</p>
+            </div>
+          </Link>
+        </div>
+      ))}
+    </div>
+  );
+
   const renderSearchResults = () => {
     if (!searchResults) return null;
-    
+
     return (
-      <div className="search-results-container">
+      <div style={{ backgroundColor: '#fff', maxHeight: '400px', overflowY: 'auto' }}>
         {isLoading ? (
-          <div className="p-3 text-center">Loading...</div>
+          <div style={{ padding: '20px', textAlign: 'center' }}>Loading...</div>
         ) : (
           <>
-            {/* Render events if they exist */}
-            {searchResults.events && searchResults.events.length > 0 && (
-              <div className="p-3">
-                <h5 className="mb-3">Events</h5>
-                <div className="row">
-                  {searchResults.events.map((event) => (
-                    <div key={event.id} className="col-md-12 mb-3">
-                      <div className="card">
-                        <div className="card-body">
-                          <h5 className="card-title">{event.Title}</h5>
-                          <h6 className="card-subtitle mb-2 text-muted">{formatDate(event.Date)}</h6>
-                          <p className="card-text">{event.Description}</p>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-            
-            {/* You can add more types here based on the API response */}
-            {/* For example, if your API returns articles */}
-            {searchResults.articles && searchResults.articles.length > 0 && (
-              <div className="p-3">
-                <h5 className="mb-3">Articles</h5>
-                <div className="row">
-                  {searchResults.articles.map((article) => (
-                    <div key={article.id} className="col-md-12 mb-3">
-                      <div className="card">
-                        <div className="card-body">
-                          <h5 className="card-title">{article.Title}</h5>
-                          <p className="card-text">{article.Content}</p>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
+            {searchResults.events?.length > 0 &&
+              renderSection("Events", searchResults.events, () => "/events")}
 
-            {/* If no results found */}
-            {(!searchResults.events || searchResults.events.length === 0) && 
-             (!searchResults.articles || searchResults.articles.length === 0) && (
-              <div className="p-3 text-center">No results found</div>
-            )}
+            {searchResults.newss?.length > 0 &&
+              renderSection("News", searchResults.newss, (item) => `/news/${item.id}`)}
+
+            {searchResults.publications?.length > 0 &&
+              renderSection("Publications", searchResults.publications, () => "#")}
+
+            {searchResults.researches?.length > 0 &&
+              renderSection("Researches", searchResults.researches, () => "#")}
+
+            {searchResults.pages?.length > 0 &&
+              renderSection("Pages", searchResults.pages, () => "#")}
+
+            {searchResults.articles?.length > 0 &&
+              renderSection("Articles", searchResults.articles, () => "#")}
+
+            {!Object.values(searchResults).some(arr => Array.isArray(arr) && arr.length > 0) &&
+              <div style={{ padding: '20px', textAlign: 'center' }}>No results found</div>}
           </>
         )}
       </div>
@@ -171,7 +134,7 @@ const Navbar = ({ onSearchResults }) => {
   };
 
   return (
-    <div className="container-fluid sticky-top" style={{ backgroundColor: "white", height: isMobile ? '120px' : 'auto', paddingLeft: "0px"}}>
+       <div className="container-fluid sticky-top" style={{ backgroundColor: "white", height: isMobile ? '120px' : 'auto', paddingLeft: "0px"}}>
       <div className="container">
         <nav className="navbar navbar-expand-lg navbar-dark p-0">
           <Link to="/" className="navbar-brand">
@@ -251,27 +214,33 @@ const Navbar = ({ onSearchResults }) => {
             </div>
           </div>
         </nav>
-        
-        {/* Search bar */}
         {showSearch && (
-          <div ref={searchRef} className="search-container py-2 position-relative">
-            <form onSubmit={handleSearch} className="d-flex">
+          <div ref={searchRef} style={{ position: 'relative', marginBottom: '10px' }}>
+            <form onSubmit={handleSearch} style={{ display: 'flex', marginTop: '10px' }}>
               <input
                 type="text"
-                className="form-control"
-                placeholder="Search..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search..."
                 autoFocus
+                style={{ flexGrow: 1, padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
               />
-              <button type="submit" className="btn btn-primary ms-2">
+              <button type="submit" style={{ padding: '10px 15px', marginLeft: '10px', borderRadius: '4px', backgroundColor: '#007BFF', color: '#fff', border: 'none' }}>
                 <i className="fas fa-search"></i>
               </button>
             </form>
-            
-            {/* Search results dropdown */}
             {searchResults && (
-              <div className="position-absolute w-100 shadow-lg bg-white border rounded mt-1 z-index-dropdown">
+              <div style={{
+                position: 'absolute',
+                top: '100%',
+                left: 0,
+                right: 0,
+                backgroundColor: '#fff',
+                border: '1px solid #ccc',
+                borderRadius: '4px',
+                marginTop: '5px',
+                zIndex: 9999
+              }}>
                 {renderSearchResults()}
               </div>
             )}
