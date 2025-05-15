@@ -134,7 +134,7 @@ const Navbar = ({ onSearchResults }) => {
   };
 
   return (
-       <div className="container-fluid sticky-top" style={{ backgroundColor: "white", height: isMobile ? '120px' : 'auto', paddingLeft: "0px"}}>
+    <div className="container-fluid sticky-top" style={{ backgroundColor: "white", height: isMobile ? '120px' : 'auto', paddingLeft: "0px"}}>
       <div className="container">
         <nav className="navbar navbar-expand-lg navbar-dark p-0">
           <Link to="/" className="navbar-brand">
@@ -201,11 +201,17 @@ const Navbar = ({ onSearchResults }) => {
               
               {/* Search button for desktop */}
               {!isMobile && (
-                <div className="nav-item">
+                <div className="nav-item position-relative">
                   <button 
                     onClick={toggleSearch}
                     className="nav-link btn"
-                    style={{ fontWeight: "bold", color: 'black', background: 'none', border: 'none' }}
+                    style={{ 
+                      fontWeight: "bold", 
+                      color: 'black', 
+                      background: 'none', 
+                      border: 'none',
+                      transition: 'all 0.3s ease'
+                    }}
                   >
                     <i className="fas fa-search"></i> Search
                   </button>
@@ -214,33 +220,143 @@ const Navbar = ({ onSearchResults }) => {
             </div>
           </div>
         </nav>
+
+        {/* Improved Search Bar */}
         {showSearch && (
-          <div ref={searchRef} style={{ position: 'relative', marginBottom: '10px' }}>
-            <form onSubmit={handleSearch} style={{ display: 'flex', marginTop: '10px' }}>
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search..."
-                autoFocus
-                style={{ flexGrow: 1, padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
-              />
-              <button type="submit" style={{ padding: '10px 15px', marginLeft: '10px', borderRadius: '4px', backgroundColor: '#007BFF', color: '#fff', border: 'none' }}>
-                <i className="fas fa-search"></i>
+          <div 
+            ref={searchRef} 
+            className="search-container"
+            style={{ 
+              position: 'relative', 
+              marginBottom: '15px',
+              marginTop: '10px',
+              borderRadius: '8px',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+              backgroundColor: '#f8f9fa',
+              padding: '12px'
+            }}
+          >
+            <form 
+              onSubmit={handleSearch} 
+              style={{ 
+                display: 'flex',
+                alignItems: 'center'
+              }}
+            >
+              <div 
+                style={{ 
+                  position: 'relative',
+                  width: '100%',
+                  display: 'flex',
+                  alignItems: 'center'
+                }}
+              >
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: '15px',
+                    color: '#6c757d',
+                    zIndex: 1
+                  }}
+                >
+                  <i className="fas fa-search"></i>
+                </div>
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search for content..."
+                  autoFocus
+                  style={{ 
+                    width: '100%',
+                    padding: '12px 20px 12px 40px',
+                    borderRadius: '25px',
+                    border: '1px solid #dee2e6',
+                    fontSize: '16px',
+                    transition: 'all 0.3s ease',
+                    outline: 'none',
+                    boxShadow: 'none'
+                  }}
+                  onFocus={(e) => {
+                    e.target.style.boxShadow = '0 0 0 3px rgba(0,123,255,0.1)';
+                    e.target.style.borderColor = '#80bdff';
+                  }}
+                  onBlur={(e) => {
+                    e.target.style.boxShadow = 'none';
+                    e.target.style.borderColor = '#dee2e6';
+                  }}
+                />
+              </div>
+              <button 
+                type="submit" 
+                style={{ 
+                  marginLeft: '10px',
+                  padding: '10px 24px',
+                  borderRadius: '25px',
+                  backgroundColor: '#007BFF',
+                  color: '#fff',
+                  border: 'none',
+                  fontWeight: '500',
+                  transition: 'all 0.3s ease',
+                  cursor: 'pointer'
+                }}
+                onMouseOver={(e) => {
+                  e.target.style.backgroundColor = '#0069d9';
+                  e.target.style.transform = 'translateY(-1px)';
+                }}
+                onMouseOut={(e) => {
+                  e.target.style.backgroundColor = '#007BFF';
+                  e.target.style.transform = 'translateY(0)';
+                }}
+              >
+                Search
+              </button>
+              <button 
+                type="button" 
+                onClick={toggleSearch}
+                style={{ 
+                  marginLeft: '10px',
+                  padding: '10px',
+                  borderRadius: '50%',
+                  backgroundColor: '#f8f9fa',
+                  color: '#6c757d',
+                  border: '1px solid #dee2e6',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '36px',
+                  height: '36px',
+                  transition: 'all 0.3s ease'
+                }}
+                onMouseOver={(e) => {
+                  e.target.style.backgroundColor = '#e2e6ea';
+                }}
+                onMouseOut={(e) => {
+                  e.target.style.backgroundColor = '#f8f9fa';
+                }}
+              >
+                <i className="fas fa-times"></i>
               </button>
             </form>
+
+            {/* Search Results */}
             {searchResults && (
-              <div style={{
-                position: 'absolute',
-                top: '100%',
-                left: 0,
-                right: 0,
-                backgroundColor: '#fff',
-                border: '1px solid #ccc',
-                borderRadius: '4px',
-                marginTop: '5px',
-                zIndex: 9999
-              }}>
+              <div 
+                style={{
+                  position: 'absolute',
+                  top: '100%',
+                  left: 0,
+                  right: 0,
+                  backgroundColor: '#fff',
+                  border: '1px solid #eaeaea',
+                  borderRadius: '8px',
+                  marginTop: '8px',
+                  zIndex: 9999,
+                  boxShadow: '0 6px 16px rgba(0,0,0,0.1)',
+                  overflow: 'hidden'
+                }}
+              >
                 {renderSearchResults()}
               </div>
             )}
