@@ -4,19 +4,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
 
-const News = () => {
-  const [news, setNews] = useState([]);
-
+const Media = () => {
+  const [media,setMedia] = useState([]);
   useEffect(() => {
-    fetch(`${apiEndpoint}/api/newss?populate=*`)
+      fetch(`${apiEndpoint}/api/media-coverages?populate=*`)
       .then(response => response.json())
-      .then(data => setNews(data.data))
+      .then(data => setMedia(data.data))
       .catch(error => console.error('Error fetching news:', error));
   }, []);
 
-  // Sort news by createdAt in descending order
-  const sortedNews = news.sort((a, b) => new Date(b.attributes.Date) - new Date(a.attributes.Date));
-
+  const sortedMedia = media.sort((a, b) => new Date(b.attributes.Date) - new Date(a.attributes.Date));
   const maxLength = 100; // Adjust the length as needed
   const itemHeight = '450px'; // Fixed height for all news items
   const overlayColor = 'rgb(255, 234, 255)'; // Lighter overlay color
@@ -56,12 +53,12 @@ const News = () => {
               marginBottom: '15px',
             }}
           >
-            News
+            Media
           </div>
-          <h1 style={{ marginBottom: '20px' }}>Explore Our Recent News</h1>
+          <h1 style={{ marginBottom: '20px' }}>Media Coverage</h1>
         </div>
-        <div className="row" style={{ rowGap: '30px' }}>
-          {sortedNews.map((item, index) => (
+                <div className="row" style={{ rowGap: '30px' }}>
+          {sortedMedia.map((item, index) => (
             <div key={item.id} className="col-lg-4 col-md-6 d-flex">
               <div
                 style={{
@@ -136,9 +133,10 @@ const News = () => {
             </div>
           ))}
         </div>
+
       </div>
     </div>
   );
 };
 
-export default News;
+export default Media;
