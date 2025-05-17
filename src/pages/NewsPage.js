@@ -6,13 +6,18 @@ const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
 
 const NewsPage = () => {
   const [news, setNews] = useState([]);
-
+  const [media,setMedia] = useState([]);
   useEffect(() => {
     fetch(`${apiEndpoint}/api/newss?populate=*`)
       .then(response => response.json())
       .then(data => setNews(data.data))
       .catch(error => console.error('Error fetching news:', error));
-  }, []);
+  fetch(`${apiEndpoint}/api/media-coverages?populate=*`)
+      .then(response => response.json())
+      .then(data => setMedia(data.data))
+      .catch(error => console.error('Error fetching news:', error));
+  },
+  []);
   return (
     <div>
       <div className="container-fluid  hero-header" style={{ background: "rgb(59,32,59)" }}>
