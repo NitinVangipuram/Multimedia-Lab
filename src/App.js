@@ -28,6 +28,7 @@ import AnnoucementDetail from './pages/AnnoucementDetail';
 import AnnoucementsPage from './pages/AnnoucementsPage';
 import ResearchThrustAreas from './pages/ResearchThrustAreas';
 import MediaPage from './pages/MediaPage';
+import PeoplePage from './pages/PeoplePage';
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
           <Route path="/donate" element={<DonateUs />} />
           <Route path="/publications" element={<PublicationsPage />} />
           <Route path="/publications/:id" element={<PublicationDetail />} />
+          <Route path ="/people" element={<PeoplePage />}/>
           <Route path="/events" element={<EventsPage />} />
           <Route path="/projects" element={<WorkPage />} />
           <Route path="/projects/:id" element={<ProjectDetailPage />} />
