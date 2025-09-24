@@ -29,6 +29,7 @@ import AnnoucementsPage from './pages/AnnoucementsPage';
 import ResearchThrustAreas from './pages/ResearchThrustAreas';
 import MediaPage from './pages/MediaPage';
 import PeoplePage from './pages/PeoplePage';
+import DigitalTwin from './pages/DigitalTwin';
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
           <Route path="/projects/:id" element={<ProjectDetailPage />} />
           <Route path="/:slug" element={<DynamicPage />} />
           <Route path="/media" element={<MediaPage />} />
+          <Route path ="/digitaltwins" element={<DigitalTwin />} />
         </Routes>
         <Footer />
       </div>
